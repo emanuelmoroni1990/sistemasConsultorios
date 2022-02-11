@@ -20,6 +20,7 @@
     --main-bg-color: rgb(83, 158, 143);
     --main-bg-color-t: rgba(255, 255, 255, 0.1);
     --font-color: rgb(226, 232, 192);
+    --carousel-font-color: rgb(51, 98, 88);
     --main-font-color: rgb(108, 133, 117);
 }
 
@@ -153,6 +154,28 @@ li {
     border-bottom: 1px solid var(--main-font-color);
 }
 
+.carousel-inner img {
+    height: 350px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.carousel-inner p {
+    width: auto;
+    font-family: 'Catamaran',
+        sans-serif;
+    font-size: x-large;
+    color: var(--carousel-font-color);
+    background-color: rgba(255, 255, 255, 0.6);
+    /* background: radial-gradient(rgb(255, 255, 255, 0.9), rgb(255, 255, 255, 0)); */
+    border-radius: 0.5rem;
+}
+
+.row__value {
+    display: flex;
+    text-align: center;
+}
+
 /* 
  * Esta opción la coloco para que no se vea la barra vertical de scroll pero que no se pierda la 
  * funcionalidad. emoroni.
@@ -191,6 +214,7 @@ input[type=number] {
 }
 
 .row__foot {
+    align-items: center;
     justify-content: space-evenly;
 }
 
@@ -312,6 +336,11 @@ footer {
  * Estilos para la sección de valores.
  * Empleado en el index.html. emoroni.
  */
+
+.value-section {
+    width: 100%;
+    margin: 0 1rem 1rem 1rem;
+}
 
 .value-section i {
     display: inline-block;
@@ -490,6 +519,10 @@ footer {
     #segundaDescripcion {
         order: 2;
     }
+
+    .carousel-inner p {
+        font-size: large;
+    }
 }
 
 @media (max-width: 650px) {
@@ -500,8 +533,18 @@ footer {
         margin-right: 1rem;
     }
 
+    .row__value {
+        flex-direction: column;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
     .row__foot {
         flex-direction: row;
+    }
+
+    .value-section {
+        width: auto;
     }
 
     .second-section--col img {
