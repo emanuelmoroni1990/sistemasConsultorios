@@ -1,0 +1,431 @@
+/*
+ * Hoja de estilos en cascada para el tercer desafío entregable.
+ * Coder House; Emanuel Moroni.
+ */
+
+/*
+ * Fuentes empleadas.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+/*
+ * Paleta de colores empleada: 
+ * https: //coolors.co/21d0c3-28cabd-2ec4b6-3ab7a9-539e8f-609282-6c8575-a7b79b-e2e8c0
+ */
+
+:root {
+    --main-bg-color: rgb(83, 158, 143);
+    --main-bg-color-t: rgba(255, 255, 255, 0.1);
+    --font-color: rgb(226, 232, 192);
+    --main-font-color: rgb(108, 133, 117);
+}
+
+/*
+  * Reset
+  */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--font-color)
+}
+
+hr {
+    border-style: solid;
+    border-top-width: 1px;
+    border-bottom-width: 0px;
+    border-color: var(--main-font-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+/* 
+ * Esta opción la coloco para que no se vea la barra vertical de scroll pero que no se pierda la 
+ * funcionalidad. emoroni.
+ */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/*
+ * Esta opción la coloco para que no aparezcan los cursos de up y down en el campo numérico. emoroni.
+ */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/*
+ * Comportamiento de los flexboxs. emoroni.
+ */
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.row__foot {
+    justify-content: space-evenly;
+}
+
+.row__value {
+    align-items: flex-start;
+    margin-bottom: 4rem;
+}
+
+.col {
+    /* Podría reemplazar esta propiedad con un width del 100%. */
+    flex-basis: 100%;
+    margin: 0 1rem 1rem 1rem;
+}
+
+.col__nav {
+    /* Esto lo hago para que me queden equidistante cada uno de los vínculos de la barra de navegación */
+}
+
+/*
+ * Estilos para la sección de header y footer. 
+ */
+
+header,
+footer {
+    width: 100%;
+    background-color: var(--main-bg-color);
+    overflow: hidden;
+}
+
+footer {
+    position: fixed;
+    bottom: 0%;
+}
+
+.header__nav,
+.footer__nav {
+    height: 3.5rem;
+    display: grid;
+    grid-template-columns: 20vw auto 20vw;
+    justify-content: stretch;
+}
+
+.header__nav ul li {
+    text-align: center;
+    padding: 5px;
+    margin: auto;
+    font-family: 'Comfortaa', cursive;
+    font-size: 1rem;
+}
+
+.header__nav ul li:hover {
+    background-color: var(--main-bg-color-t);
+}
+
+.footer__nav ul li {
+    font-size: 2rem;
+    padding: 5px;
+    margin: 0px 10px 0px 10px;
+}
+
+.fa-facebook-square:hover {
+    color: rgba(59, 89, 152, 0.5);
+}
+
+.fa-whatsapp:hover {
+    color: rgba(74, 201, 89, 0.5);
+}
+
+.fa-instagram:hover {
+    color: rgba(131, 58, 180, 0.5);
+}
+
+/*
+ * Estilos para la sección principal. 
+ * Empleado principalmente en el index.html. emoroni.
+ */
+
+.main-section__img {
+    height: 350px;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.main-section__title h1 {
+    font-family: 'Catamaran', sans-serif;
+    font-size: xx-large;
+    text-align: center;
+    color: var(--main-font-color);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    border-bottom: 1px solid var(--main-font-color);
+}
+
+.main-section video {
+    margin-top: 1.5rem;
+    width: 100%;
+    height: 400px;
+}
+
+.servicios h1 {
+    margin-top: 0rem;
+}
+
+.main-section__parrafo p {
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    font-weight: bolder;
+    text-align: center;
+    color: var(--main-font-color);
+    margin-top: 1rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+/*
+ * Estilos para la sección de valores.
+ * Empleado en el index.html. emoroni.
+ */
+
+.value-section i {
+    display: inline-block;
+    color: var(--main-font-color);
+    font-size: 3rem;
+    margin: 1rem;
+}
+
+.value-section p {
+    color: var(--main-font-color);
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    font-weight: bolder;
+}
+
+/*
+ * Estilos para la sección las tarjetas de servicios.
+ * Empleado en el servicios.html, emoroni.
+ */
+
+.second-section {
+    margin-bottom: 3.5rem;
+}
+
+.second-section--row {
+    margin-top: 1rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-bottom: 0rem;
+    border-bottom: 1px solid var(--main-font-color);
+}
+
+.second-section--col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#segundaImagen {
+    order: 2;
+}
+
+#segundaDescripcion {
+    order: 1;
+}
+
+.second-section img {
+    height: 250px;
+    width: 400px;
+    object-fit: cover;
+}
+
+.second-section h3 {
+    font-family: 'Catamaran', sans-serif;
+    font-size: larger;
+    text-align: center;
+    color: var(--main-font-color);
+}
+
+.second-section p {
+    color: var(--main-font-color);
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    font-weight: bolder;
+}
+
+/*
+ * Estilos para la sección la sección de contacto.
+ * Empleado en el contacto.html, emoroni.
+ */
+
+.contact-section {
+    margin-left: 4rem;
+    margin-right: 4rem;
+    background-color: var(--font-color);
+}
+
+.contact-section h3 {
+    font-family: 'Catamaran', sans-serif;
+    font-size: larger;
+    text-align: center;
+    color: var(--main-font-color);
+    margin-bottom: 1rem;
+}
+
+.contact-section form {
+    padding: 1rem;
+}
+
+.contact-section--row {
+    margin: 0;
+    align-items: stretch;
+}
+
+.contact-section input {
+    height: 35px;
+    width: 100%;
+    display: inline-block;
+    margin: 0.5rem 0;
+    border: 1px solid var(--main-font-color);
+    border-radius: 4px;
+    text-align: center;
+    color: var(--main-font-color);
+}
+
+.contact-section--col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+}
+
+.contact-section--col.consulta input {
+    height: 100%;
+    overflow-wrap: break-word;
+}
+
+.contact-section--button {
+    margin-bottom: 0;
+}
+
+.contact-section input[type=submit] {
+    color: var(--font-color);
+    background-color: var(--main-bg-color);
+}
+
+.contact-section input:focus {
+    outline: 1px solid var(--main-font-color);
+}
+
+/*
+ * Medias Querys
+ * max-width, hasta. 
+ * min-width, desde.
+ */
+
+@media (max-width: 900px) {
+
+    .header__nav,
+    .footer__nav {
+        height: 3.5rem;
+        display: grid;
+        grid-template-columns: 15vw auto 15vw;
+        justify-content: stretch;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .header__nav,
+    .footer__nav {
+        height: 3.5rem;
+        display: grid;
+        grid-template-columns: 10vw auto 10vw;
+        justify-content: stretch;
+    }
+
+    .main-section__title h1 {
+        font-size: x-large;
+    }
+
+    .value-section i {
+        font-size: 2rem;
+    }
+
+    .second-section--row {
+        flex-direction: column;
+    }
+
+    #segundaImagen {
+        order: 1;
+    }
+
+    #segundaDescripcion {
+        order: 2;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .row {
+        flex-direction: column;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .row__foot {
+        flex-direction: row;
+    }
+
+    .second-section--col img {
+        width: 350px;
+    }
+
+    .header__nav {
+        height: auto;
+    }
+
+    .contact-section {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .contact-section--row,
+    .contact-section--col,
+    .contact-section--button {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .contact-section--col.consulta input {
+        height: 150px;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .second-section--col img {
+        width: 320px;
+    }
+}
