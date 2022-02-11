@@ -1,5 +1,5 @@
 /*
- * Hoja de estilos en cascada para el tercer desafío entregable.
+ * Hoja de estilos en cascada para el cuarto y quinto desafío entregable.
  * Coder House; Emanuel Moroni.
  */
 
@@ -12,7 +12,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 
 /*
- * Paleta de colores empleada: 
+ * Paleta de colores empleada:
  * https: //coolors.co/21d0c3-28cabd-2ec4b6-3ab7a9-539e8f-609282-6c8575-a7b79b-e2e8c0
  */
 
@@ -25,7 +25,7 @@
 }
 
 /*
-  * Reset
+  * Reset; Muchas de estos resets los tuve que hacer para no perder el estilo debido a la importación de Bootstrap.
   */
 
 * {
@@ -33,6 +33,22 @@
     padding: 0;
     box-sizing: border-box;
     color: var(--font-color)
+}
+
+h1 {
+    font-weight: bold;
+    margin: 0;
+    font-size: 1.17rem;
+}
+
+h3 {
+    font-weight: bold;
+    margin: 0;
+    font-size: 1.17rem;
+}
+
+p {
+    margin-bottom: 0;
 }
 
 hr {
@@ -72,11 +88,9 @@ li {
 
 .header__boots {
     background-color: var(--main-bg-color);
-    text-align: center;
     padding: 5px;
     margin: auto;
-    font-family: 'Comfortaa',
-        cursive;
+    font-family: 'Comfortaa', cursive;
     font-size: 1rem;
 }
 
@@ -84,16 +98,13 @@ li {
     text-align: center;
     padding: 5px;
     margin: 0.5rem;
-    font-family: 'Comfortaa',
-        cursive;
-    font-size: 1rem;
 }
 
 .navbar-nav a:hover {
     background-color: var(--main-bg-color-t);
 }
 
-/* 
+/*
  * Recrear este reset puede ser la clave.
  */
 .row>* {
@@ -105,12 +116,13 @@ li {
 }
 
 /*
- * Estilos para la sección de LogIn 
+ * Estilos para la sección de LogIn
  */
 
 .form__login {
     margin: 1rem;
     padding: 1rem;
+    background-color: var(--font-color);
 }
 
 .form__login label {
@@ -122,6 +134,7 @@ li {
 
 .form__login button {
     margin-top: 1.5rem;
+    margin-bottom: 2rem;
     height: 3rem;
     width: 75%;
     align-items: center;
@@ -154,6 +167,45 @@ li {
     border-bottom: 1px solid var(--main-font-color);
 }
 
+/*
+ * Estilos para la sección de contacto
+ */
+
+.form__contacto {
+    margin: 1rem;
+    margin-bottom: 4rem;
+    padding: 1rem;
+    background-color: var(--font-color);
+}
+
+.form__contacto label {
+    font-family: 'Comfortaa',
+        cursive;
+    font-size: 1rem;
+    color: var(--main-bg-color);
+}
+
+.form__contacto button {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    height: 3rem;
+    width: 75%;
+    align-items: center;
+    font-family: 'Comfortaa',
+        cursive;
+    background-color: var(--main-bg-color);
+    color: var(--font-color);
+}
+
+.form__contacto textarea {
+    height: 10vh;
+    resize: none;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
 .carousel-inner img {
     height: 350px;
     width: 100%;
@@ -176,8 +228,8 @@ li {
     text-align: center;
 }
 
-/* 
- * Esta opción la coloco para que no se vea la barra vertical de scroll pero que no se pierda la 
+/*
+ * Esta opción la coloco para que no se vea la barra vertical de scroll pero que no se pierda la
  * funcionalidad. emoroni.
  */
 body::-webkit-scrollbar {
@@ -201,6 +253,21 @@ input[type=number] {
 /*
  * Comportamiento de los flexboxs. emoroni.
  */
+
+.row__personal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.col__personal {
+    flex-basis: 100%;
+    margin: 0 1rem 1rem 1rem;
+    align-items: center;
+}
 
 .row__ema {
     padding: 0;
@@ -234,7 +301,7 @@ input[type=number] {
 }
 
 /*
- * Estilos para la sección de header y footer. 
+ * Estilos para la sección de header y footer.
  */
 
 .header__ema,
@@ -288,7 +355,7 @@ footer {
 }
 
 /*
- * Estilos para la sección principal. 
+ * Estilos para la sección principal.
  * Empleado principalmente en el index.html. emoroni.
  */
 
@@ -304,6 +371,7 @@ footer {
     font-size: xx-large;
     text-align: center;
     color: var(--main-font-color);
+    padding: 0.5rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
     margin-left: 4rem;
@@ -362,7 +430,7 @@ footer {
  */
 
 .second-section {
-    margin-bottom: 3.5rem;
+    margin-bottom: 5rem;
 }
 
 .second-section--row {
@@ -399,6 +467,7 @@ footer {
     font-size: larger;
     text-align: center;
     color: var(--main-font-color);
+    margin: 0.25rem;
 }
 
 .second-section p {
@@ -475,7 +544,7 @@ footer {
 
 /*
  * Medias Querys
- * max-width, hasta. 
+ * max-width, hasta.
  * min-width, desde.
  */
 
