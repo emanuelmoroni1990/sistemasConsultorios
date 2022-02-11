@@ -35,6 +35,7 @@
 }
 
 hr {
+    margin: 0;
     border-style: solid;
     border-top-width: 1px;
     border-bottom-width: 0px;
@@ -43,10 +44,113 @@ hr {
 
 a {
     text-decoration: none;
+    /* Modificación por Bootstrap */
+    color: var(--font-color);
+}
+
+a:hover {
+    /* Modificación por Bootstrap */
+    color: var(--font-color);
 }
 
 li {
     list-style-type: none;
+}
+
+/*
+ * Bootstrap
+ */
+
+.navbar-collapse {
+    justify-content: center;
+}
+
+.navbar>.container-fluid {
+    justify-content: end;
+}
+
+.header__boots {
+    background-color: var(--main-bg-color);
+    text-align: center;
+    padding: 5px;
+    margin: auto;
+    font-family: 'Comfortaa',
+        cursive;
+    font-size: 1rem;
+}
+
+.navbar-nav a {
+    text-align: center;
+    padding: 5px;
+    margin: 0.5rem;
+    font-family: 'Comfortaa',
+        cursive;
+    font-size: 1rem;
+}
+
+.navbar-nav a:hover {
+    background-color: var(--main-bg-color-t);
+}
+
+/* 
+ * Recrear este reset puede ser la clave.
+ */
+.row>* {
+    width: auto;
+}
+
+.row__foot {
+    padding: 0;
+}
+
+/*
+ * Estilos para la sección de LogIn 
+ */
+
+.form__login {
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.form__login label {
+    font-family: 'Comfortaa',
+        cursive;
+    font-size: 1rem;
+    color: var(--main-bg-color);
+}
+
+.form__login button {
+    margin-top: 1.5rem;
+    height: 3rem;
+    width: 75%;
+    align-items: center;
+    font-family: 'Comfortaa',
+        cursive;
+    background-color: var(--main-bg-color);
+    color: var(--font-color);
+}
+
+.row__button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.signIn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signIn a {
+    width: auto;
+    font-family: 'Catamaran', sans-serif;
+    font-size: large;
+    text-align: center;
+    color: var(--main-font-color);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--main-font-color);
 }
 
 /* 
@@ -75,7 +179,9 @@ input[type=number] {
  * Comportamiento de los flexboxs. emoroni.
  */
 
-.row {
+.row__ema {
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -107,7 +213,7 @@ input[type=number] {
  * Estilos para la sección de header y footer. 
  */
 
-header,
+.header__ema,
 footer {
     width: 100%;
     background-color: var(--main-bg-color);

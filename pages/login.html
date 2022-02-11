@@ -1,5 +1,9 @@
-<!-- Tercer desafío entregable; Curso de Desarrollo Web -->
+<!-- Cuarto y quinto desafío entregable; Curso de Desarrollo Web -->
 <!-- Coder House; Emanuel Moroni-->
+
+<!-- Links de interés:
+     * https://bootstrapious.com/p/how-to-change-bootstrap-navbar-height
+    -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +12,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
         <link rel="stylesheet" href="../styles/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -15,34 +22,51 @@
         <link rel="shortcut icon" href="../media/icons/stethoscope.png">
     </head>
     <body>
-               
-        <header class="header">
-            <hr>
-            <div class="header__nav">
-                <div></div>
-                <ul class="row">
-                    <li class="col__nav"><a href="../index.html">Home</a></li>
-                    <li class="col__nav"><a href="./servicios.html">Servicios</a></li>
-                    <li class="col__nav"><a href="./nosotros.html">Sobre nosotros</a></li>
-                    <li class="col__nav"><a href="./contacto.html">Contacto</a></li>
-                    <li class="col__nav"><a href="./login.html">Gestión Personal</a></li>
-                </ul>
-                <div></div>
-            </div>
-            <hr>
-        </header>
 
-        <section class="main-section">
-            <img src="../media/desarrollo.jpg" alt="Ups..." class="main-section__img">
+        <!-- Para incrementar el alto de la barra de navegación y que no se rompa cuando expande se tiene que agregar la clase py-n. Ver link de referencia. emoroni. -->
+        <nav class="header__boots navbar navbar-expand-md navbar-light py-3">
             <hr>
-            <div class="main-section__title">
-                <h1>Sección en desarrollo</h1>
+            <div class="container-fluid">
+            <!--
+                Para alcanzar lo que quiero aquí, necesito emplear JS. 
+                <a class="navbar-brand" href="#">
+                <img src="../media/icons/stethoscope.png" alt="" width="30" height="24">
+                </a>
+            -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a href="../index.html">Home</a>
+                    <a href="./servicios.html">Servicios</a>
+                    <a href="./nosotros.html">Sobre Nosotros</a>
+                    <a href="./contacto.html">Contacto</a>
+                    <a href="./login.html">Gestión Personal</a>
+                </div>
+                </div>
             </div>
-            <div class="main-section__parrafo">
-                <p>
-                    Nuestro equipo de desarrollo se encuentra trabajando en el sistema de gestión de pacientes. Disculpe las molestias.
-                </p>
-            </div>
+            <hr>
+        </nav>
+
+        <section class="form__login">
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Dirección de correo electrónico</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="row__button">
+                    <button type="submit" class="btn button_login">Ingresar</button>
+                </div>                
+            </form>
+        </section>
+
+        <section class="signIn">
+            <a href="https://google.com">¿No te encuentras registrado todavía?</a>
         </section>
 
         <footer class="footer">
