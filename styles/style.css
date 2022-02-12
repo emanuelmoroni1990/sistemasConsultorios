@@ -25,6 +25,28 @@
 }
 
 /*
+ * Esta opción la coloco para que no se vea la barra vertical de scroll pero que no se pierda la
+ * funcionalidad. emoroni.
+ */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/*
+ * Esta opción la coloco para que no aparezcan los cursos de up y down en el campo numérico. emoroni.
+ */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/*
   * Reset; Muchas de estos resets los tuve que hacer para no perder el estilo debido a la importación de Bootstrap.
   */
 
@@ -74,8 +96,38 @@ li {
     list-style-type: none;
 }
 
+.row>* {
+    width: auto;
+}
+
 /*
- * Bootstrap
+ * Comportamiento de los flexboxs. emoroni.
+ */
+
+.row__personal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.col__personal {
+    flex-basis: 100%;
+    margin: 0 1rem 1rem 1rem;
+    align-items: center;
+}
+
+.col {
+    /* Podría reemplazar esta propiedad con un width del 100%. */
+    flex-basis: 100%;
+    margin: 0 1rem 1rem 1rem;
+}
+
+/*
+ * Bootstrap NavBar
+ * Estilos empleados para respetar la idea original con la nueva herramienta de collapse.
  */
 
 .navbar-collapse {
@@ -105,13 +157,40 @@ li {
 }
 
 /*
- * Recrear este reset puede ser la clave.
+ * Carousel Bootstrap
  */
-.row>* {
-    width: auto;
+
+.carousel-inner img {
+    height: 350px;
+    width: 100%;
+    object-fit: cover;
 }
 
-.row__foot {
+.carousel-inner p {
+    width: auto;
+    font-family: 'Catamaran',
+        sans-serif;
+    font-size: x-large;
+    color: var(--carousel-font-color);
+    background-color: rgba(255, 255, 255, 0.6);
+    /* background: radial-gradient(rgb(255, 255, 255, 0.9), rgb(255, 255, 255, 0)); */
+    border-radius: 0.5rem;
+}
+
+/*
+ * Sección de valores
+ */
+
+.row__personal--valores {
+    margin-bottom: 4rem;
+}
+
+/*
+ * Footer
+ */
+
+.row__personal--foot {
+    justify-content: space-evenly;
     padding: 0;
 }
 
@@ -132,7 +211,8 @@ li {
     color: var(--main-bg-color);
 }
 
-.form__login button {
+.form__login button,
+.form__contacto button {
     margin-top: 1.5rem;
     margin-bottom: 2rem;
     height: 3rem;
@@ -163,7 +243,7 @@ li {
     text-align: center;
     color: var(--main-font-color);
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 4rem;
     border-bottom: 1px solid var(--main-font-color);
 }
 
@@ -185,18 +265,6 @@ li {
     color: var(--main-bg-color);
 }
 
-.form__contacto button {
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
-    height: 3rem;
-    width: 75%;
-    align-items: center;
-    font-family: 'Comfortaa',
-        cursive;
-    background-color: var(--main-bg-color);
-    color: var(--font-color);
-}
-
 .form__contacto textarea {
     height: 10vh;
     resize: none;
@@ -206,105 +274,11 @@ li {
     margin-bottom: 1rem;
 }
 
-.carousel-inner img {
-    height: 350px;
-    width: 100%;
-    object-fit: cover;
-}
-
-.carousel-inner p {
-    width: auto;
-    font-family: 'Catamaran',
-        sans-serif;
-    font-size: x-large;
-    color: var(--carousel-font-color);
-    background-color: rgba(255, 255, 255, 0.6);
-    /* background: radial-gradient(rgb(255, 255, 255, 0.9), rgb(255, 255, 255, 0)); */
-    border-radius: 0.5rem;
-}
-
-.row__value {
-    display: flex;
-    text-align: center;
-}
-
-/*
- * Esta opción la coloco para que no se vea la barra vertical de scroll pero que no se pierda la
- * funcionalidad. emoroni.
- */
-body::-webkit-scrollbar {
-    display: none;
-}
-
-/*
- * Esta opción la coloco para que no aparezcan los cursos de up y down en el campo numérico. emoroni.
- */
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type=number] {
-    -moz-appearance: textfield;
-}
-
-/*
- * Comportamiento de los flexboxs. emoroni.
- */
-
-.row__personal {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-}
-
-.col__personal {
-    flex-basis: 100%;
-    margin: 0 1rem 1rem 1rem;
-    align-items: center;
-}
-
-.row__ema {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-}
-
-.row__foot {
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.row__value {
-    align-items: flex-start;
-    margin-bottom: 4rem;
-}
-
-.col {
-    /* Podría reemplazar esta propiedad con un width del 100%. */
-    flex-basis: 100%;
-    margin: 0 1rem 1rem 1rem;
-}
-
-.col__nav {
-    /* Esto lo hago para que me queden equidistante cada uno de los vínculos de la barra de navegación */
-}
-
 /*
  * Estilos para la sección de header y footer.
  */
 
-.header__ema,
+header,
 footer {
     width: 100%;
     background-color: var(--main-bg-color);
@@ -316,7 +290,7 @@ footer {
     bottom: 0%;
 }
 
-.header__nav,
+/* .header__nav, */
 .footer__nav {
     height: 3.5rem;
     display: grid;
@@ -324,7 +298,8 @@ footer {
     justify-content: stretch;
 }
 
-.header__nav ul li {
+/* Esto fue empleado en una versión anterior del header. emoroni. */
+/* .header__nav ul li {
     text-align: center;
     padding: 5px;
     margin: auto;
@@ -334,7 +309,7 @@ footer {
 
 .header__nav ul li:hover {
     background-color: var(--main-bg-color-t);
-}
+} */
 
 .footer__nav ul li {
     font-size: 2rem;
@@ -359,12 +334,13 @@ footer {
  * Empleado principalmente en el index.html. emoroni.
  */
 
-.main-section__img {
+/* Esto fue empleado en una versión anterior de la imagen central. emoroni. */
+/* .main-section__img {
     height: 350px;
     width: 100%;
     object-fit: cover;
     display: block;
-}
+} */
 
 .main-section__title h1 {
     font-family: 'Catamaran', sans-serif;
@@ -482,7 +458,8 @@ footer {
  * Empleado en el contacto.html, emoroni.
  */
 
-.contact-section {
+/* Esto fue empleado en una versión anterior de la imagen central. emoroni. */
+/* .contact-section {
     margin-left: 4rem;
     margin-right: 4rem;
     background-color: var(--font-color);
@@ -540,7 +517,7 @@ footer {
 
 .contact-section input:focus {
     outline: 1px solid var(--main-font-color);
-}
+} */
 
 /*
  * Medias Querys
@@ -596,20 +573,20 @@ footer {
 
 @media (max-width: 650px) {
 
-    .row {
+    .row__personal {
         flex-direction: column;
         margin-left: 1rem;
         margin-right: 1rem;
+    }
+
+    .row__personal--foot {
+        flex-direction: row;
     }
 
     .row__value {
         flex-direction: column;
         margin-left: 1rem;
         margin-right: 1rem;
-    }
-
-    .row__foot {
-        flex-direction: row;
     }
 
     .value-section {
