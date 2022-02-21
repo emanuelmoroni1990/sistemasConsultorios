@@ -7,7 +7,7 @@
 1. Las transiciones aplicadas son de AOS y se pueden ver en los elementos del inedx.html y servicios.html. Sobre todo los mismos toman mayor apreciación en la versión mobile.
 
 * Bootstrap:
-Una de las primeras modificaciones necesarias para su implementación fue el ajuste de las clases empladas previamente para que el desarrollo pueda convivir con ya realizado.
+Una de las primeras modificaciones necesarias para su implementación fue el ajuste de las clases empladas previamente para que el desarrollo pueda convivir con lo ya realizado.
 1. Se implementó la navbar logrando que la misma colapse cuando se encuentra por debajo del breakpoint establecido.
 2. En la ventana principal se utilizó un carousel con imágenes representativas del servicio brindado por los consultorios.
 3. El sistema de contacto y de login de usuario se desarrollaron empleando los formularios del framework.
