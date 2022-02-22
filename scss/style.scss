@@ -1,0 +1,228 @@
+// Fuentes empleadas.
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+// Variables
+
+$main-bg-color: rgb(83, 158, 143);
+$main-bg-color-t: rgba(255, 255, 255, 0.1);
+$font-color: rgb(226, 232, 192);
+$carousel-font-color: rgb(51, 98, 88);
+$main-font-color: rgb(108, 133, 117);
+
+// Reset
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-weight: bold;
+    margin: 0;
+    font-size: 1.17rem;
+}
+
+h3 {
+    font-weight: bold;
+    margin: 0;
+    font-size: 1.17rem;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+hr {
+    margin: 0;
+    border-style: solid;
+    border-top-width: 1px;
+    border-bottom-width: 0px;
+    border-color: var(--main-font-color);
+}
+
+a {
+    text-decoration: none;
+    /* Modificación por Bootstrap */
+    color: $font-color;
+
+    &:hover {
+        /* Modificación por Bootstrap */
+        color: $font-color;
+    }
+}
+
+li {
+    list-style-type: none;
+}
+
+// Navbar
+
+// Titulo de página
+
+.main-section__title {
+    h1 {
+        font-family: 'Catamaran', sans-serif;
+        font-size: xx-large;
+        text-align: center;
+        color: $main-font-color;
+        padding: 0.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        margin-left: 4rem;
+        margin-right: 4rem;
+        border-bottom: 1px solid $main-font-color;
+    }
+}
+
+// Form de login
+
+.form__login {
+    margin: 1rem;
+    padding: 1rem;
+    background-color: $font-color;
+
+    label {
+        font-family: 'Comfortaa', cursive;
+        font-size: 1rem;
+        color: $main-bg-color;
+    }
+
+    button {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        height: 3rem;
+        width: 75%;
+        align-items: center;
+        font-family: 'Comfortaa', cursive;
+        background-color: $main-bg-color;
+        color: $font-color;
+    }
+}
+
+.col__login {
+    margin-bottom: 16px;
+}
+
+.row__button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+// Medias querys, repasar
+
+/*
+ * Medias Querys
+ * max-width, hasta.
+ * min-width, desde.
+ */
+
+@media (max-width: 900px) {
+
+    .header__nav,
+    .footer__nav {
+        height: 3.5rem;
+        display: grid;
+        grid-template-columns: 15vw auto 15vw;
+        justify-content: stretch;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .header__nav,
+    .footer__nav {
+        height: 3.5rem;
+        display: grid;
+        grid-template-columns: 10vw auto 10vw;
+        justify-content: stretch;
+    }
+
+    .main-section__title h1 {
+        font-size: x-large;
+    }
+
+    .value-section i {
+        font-size: 2rem;
+    }
+
+    .second-section--row {
+        flex-direction: column;
+    }
+
+    #segundaImagen {
+        order: 1;
+    }
+
+    #segundaDescripcion {
+        order: 2;
+    }
+
+    .carousel-inner p {
+        font-size: large;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .row__personal {
+        flex-direction: column;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .row__personal--foot {
+        flex-direction: row;
+    }
+
+    .row__value {
+        flex-direction: column;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .value-section {
+        width: auto;
+    }
+
+    .second-section--col img {
+        width: 350px;
+    }
+
+    .header__nav {
+        height: auto;
+    }
+
+    .contact-section {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .contact-section--row,
+    .contact-section--col,
+    .contact-section--button {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .contact-section--col.consulta input {
+        height: 150px;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .second-section--col img {
+        width: 320px;
+    }
+}
