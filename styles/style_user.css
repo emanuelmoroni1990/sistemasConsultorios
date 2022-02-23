@@ -2,10 +2,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@100&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+/*
+ * Esta opción la coloco para que no se vea la barra vertical de scroll pero que no se pierda la
+ * funcionalidad. emoroni.
+ */
+body::-webkit-scrollbar {
+  display: none; }
+
+/*
+ * Esta opción la coloco para que no aparezcan los cursos de up y down en el campo numérico. emoroni.
+ */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0; }
+
+input[type=number] {
+  -moz-appearance: textfield; }
 
 * {
   margin: 0;
@@ -30,7 +43,7 @@ hr {
   border-style: solid;
   border-top-width: 1px;
   border-bottom-width: 0px;
-  border-color: var(--main-font-color); }
+  border-color: #6c8575; }
 
 a {
   text-decoration: none;
@@ -43,13 +56,78 @@ a {
 li {
   list-style-type: none; }
 
+.navbar-collapse {
+  justify-content: center; }
+
+.navbar > .container-fluid {
+  justify-content: end; }
+
+.navbar-nav a {
+  text-align: center;
+  padding: 5px;
+  margin: 0.5rem; }
+
+.navbar-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.1); }
+
+.header__boots {
+  background-color: #539e8f;
+  padding: 5px;
+  margin: auto;
+  font-family: 'Comfortaa', cursive;
+  font-size: 1rem; }
+  .header__boots--alta-usuario {
+    background-color: #53839e; }
+
+header,
+footer {
+  width: 100%;
+  background-color: #539e8f;
+  overflow: hidden; }
+
+footer {
+  position: fixed;
+  bottom: 0%; }
+
+/* .header__nav, */
+.footer__nav {
+  height: 3.5rem;
+  display: grid;
+  grid-template-columns: 20vw auto 20vw;
+  justify-content: stretch; }
+
+/* Esto fue empleado en una versión anterior del header. emoroni. */
+/* .header__nav ul li {
+    text-align: center;
+    padding: 5px;
+    margin: auto;
+    font-family: 'Comfortaa', cursive;
+    font-size: 1rem;
+}
+
+.header__nav ul li:hover {
+    background-color: var(--main-bg-color-t);
+} */
+.footer__nav ul li {
+  font-size: 2rem;
+  padding: 5px;
+  margin: 0px 10px 0px 10px; }
+
+.fa-facebook-square:hover {
+  color: rgba(59, 89, 152, 0.5); }
+
+.fa-whatsapp:hover {
+  color: rgba(74, 201, 89, 0.5); }
+
+.fa-instagram:hover {
+  color: rgba(131, 58, 180, 0.5); }
+
 .main-section__title h1 {
   font-family: 'Catamaran', sans-serif;
   font-size: xx-large;
   text-align: center;
   color: #6c8575;
   padding: 0.5rem;
-  margin-top: 1rem;
   margin-bottom: 1rem;
   margin-left: 4rem;
   margin-right: 4rem;
@@ -59,10 +137,14 @@ li {
   margin: 1rem;
   padding: 1rem;
   background-color: #e2e8c0; }
+  .form__login--alta-usuario {
+    background-color: #dde7eb; }
   .form__login label {
     font-family: 'Comfortaa', cursive;
     font-size: 1rem;
     color: #539e8f; }
+  .form__login--alta-usuario label {
+    color: #53839e; }
   .form__login button {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
@@ -72,6 +154,8 @@ li {
     font-family: 'Comfortaa', cursive;
     background-color: #539e8f;
     color: #e2e8c0; }
+  .form__login--alta-usuario button {
+    background-color: #53839e; }
 
 .col__login {
   margin-bottom: 16px; }

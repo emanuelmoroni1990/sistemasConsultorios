@@ -1,0 +1,18 @@
+@import "./variable";
+
+// Titulo de página
+
+.main-section__title {
+    h1 {
+        font-family: 'Catamaran', sans-serif;
+        font-size: xx-large;
+        text-align: center;
+        color: $main-font-color;
+        padding: 0.5rem;
+        // margin-top: 1rem; // Por el momento comento este margen superior. emoroni.
+        margin-bottom: 1rem;
+        margin-left: 4rem;
+        margin-right: 4rem;
+        border-bottom: 1px solid $main-font-color;
+    }
+}

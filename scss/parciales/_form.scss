@@ -1,0 +1,48 @@
+@import "./variable";
+
+// Form de login :)
+
+.form__login {
+    margin: 1rem;
+    padding: 1rem;
+    background-color: $font-color;
+
+    &--alta-usuario {
+        background-color: $font-color-alta-usuario;
+    }
+
+    label {
+        font-family: 'Comfortaa', cursive;
+        font-size: 1rem;
+        color: $main-bg-color;
+    }
+
+    &--alta-usuario label {
+        color: $main-bg-color-alta-usuario;
+    }
+
+    button {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        height: 3rem;
+        width: 75%;
+        align-items: center;
+        font-family: 'Comfortaa', cursive;
+        background-color: $main-bg-color;
+        color: $font-color;
+    }
+
+    &--alta-usuario button {
+        background-color: $main-bg-color-alta-usuario;
+    }
+}
+
+.col__login {
+    margin-bottom: 16px;
+}
+
+.row__button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

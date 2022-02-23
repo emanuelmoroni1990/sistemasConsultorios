@@ -15,14 +15,38 @@
         <link rel="shortcut icon" href="../media/icons/stethoscope.png">
     </head>
     <body>
+        <nav class="header__boots header__boots--alta-usuario navbar navbar-expand-md navbar-light py-3">
+            <hr>
+            <div class="container-fluid">
+            <!--
+                Para alcanzar lo que quiero aquí, necesito emplear JS. 
+                <a class="navbar-brand" href="#">
+                <img src="../media/icons/stethoscope.png" alt="" width="30" height="24">
+                </a>
+            -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a href="../index.html">Home</a>
+                    <a href="./servicios.html">Servicios</a>
+                    <a href="./nosotros.html">Sobre Nosotros</a>
+                    <a href="./contacto.html">Contacto</a>
+                    <a href="./login.html">Gestión Personal</a>
+                </div>
+                </div>
+            </div>
+            <hr>
+        </nav>
 
         <section class="main-section">
             <div class="main-section__title servicios">
-                <h1>Sistema de gestión personal</h1>
+                <h1>Alta de usuario</h1>
             </div>
         </section>
         
-        <section class="form__login">
+        <section class="form__login form__login--alta-usuario">
             <form class="row">
                 <div class="col-md-6 col__login">
                     <label for="inputEmail4" class="form-label">Nombre</label>
@@ -32,11 +56,11 @@
                     <label for="inputPassword4" class="form-label">Apellido</label>
                     <input type="text" class="form-control" id="inputPassword4">
                 </div>
-                <div class="col-md-6 col__login">
+                <div class="col-md-8 col__login">
                     <label for="inputAddress" class="form-label">Domicilio</label>
                     <input type="text" class="form-control" id="inputAddress">
                 </div>
-                <div class="col-md-6 col__login">
+                <div class="col-md-4 col__login">
                     <label for="inputState" class="form-label">Ciudad</label>
                     <select id="inputState" class="form-select">
                         <option selected></option>
@@ -45,19 +69,19 @@
                         <option>Zárate</option>
                     </select>
                 </div>
-                <div class="col-md-6 col__login">
+                <div class="col-md-4 col__login">
                     <label for="inputCity" class="form-label">Teléfono celular</label>
                     <input type="number" class="form-control" id="inputCity">
                 </div>
-                <div class="col-md-6 col__login">
+                <div class="col-md-8 col__login">
                     <label for="inputCity" class="form-label">Correo electrónico</label>
                     <input type="email" class="form-control" id="inputCity">
                 </div>
-                <div class="col-md-12 col__login">
+                <div class="col-md-6 col__login">
                     <label for="inputCity" class="form-label">Ingrese su contraseña</label>
                     <input type="password" class="form-control" id="inputCity">
                 </div>
-                <div class="col-md-12 col__login">
+                <div class="col-md-6 col__login">
                     <label for="inputCity" class="form-label">Ingrese nuevamente su contraseña</label>
                     <input type="password" class="form-control" id="inputCity">
                 </div>
@@ -65,6 +89,6 @@
                     <button type="submit" class="btn button_login">Alta usuario</button>
                 </div>
             </form>
-        </section> 
+        </section>
     </body>
 </html>

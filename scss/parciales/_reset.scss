@@ -1,0 +1,70 @@
+@import "./variable";
+
+// Reset
+
+/*
+ * Esta opción la coloco para que no se vea la barra vertical de scroll pero que no se pierda la
+ * funcionalidad. emoroni.
+ */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/*
+ * Esta opción la coloco para que no aparezcan los cursos de up y down en el campo numérico. emoroni.
+ */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-weight: bold;
+    margin: 0;
+    font-size: 1.17rem;
+}
+
+h3 {
+    font-weight: bold;
+    margin: 0;
+    font-size: 1.17rem;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+hr {
+    margin: 0;
+    border-style: solid;
+    border-top-width: 1px;
+    border-bottom-width: 0px;
+    border-color: $main-font-color;
+}
+
+a {
+    text-decoration: none;
+    /* Modificación por Bootstrap */
+    color: $font-color;
+
+    &:hover {
+        /* Modificación por Bootstrap */
+        color: $font-color;
+    }
+}
+
+li {
+    list-style-type: none;
+}
