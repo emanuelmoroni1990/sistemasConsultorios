@@ -1,0 +1,21 @@
+@import "./variable";
+
+// Carousel
+
+.carousel-inner {
+    img {
+        height: 350px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    p {
+        width: auto;
+        font-family: 'Catamaran',
+            sans-serif;
+        font-size: x-large;
+        color: $carousel-font-color;
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 0.5rem;
+    }
+}

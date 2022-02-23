@@ -1,5 +1,37 @@
 @import "./variable";
 
+// Flexboxs
+
+.row__personal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: center;
+    align-items: center; //align-items: flex-start; // Ver esto para el caso de los valores del index.html
+
+    &--valores {
+        margin-bottom: 4rem;
+    }
+
+    &--foot {
+        justify-content: space-evenly;
+        padding: 0;
+    }
+}
+
+.col__personal {
+    flex-basis: 100%;
+    margin: 0 1rem 1rem 1rem;
+    align-items: center;
+}
+
+.col {
+    /* Podría reemplazar esta propiedad con un width del 100%. */
+    flex-basis: 100%;
+    margin: 0 1rem 1rem 1rem;
+}
+
 // Navbar
 
 .navbar-collapse {
@@ -10,14 +42,16 @@
     justify-content: end;
 }
 
-.navbar-nav a {
-    text-align: center;
-    padding: 5px;
-    margin: 0.5rem;
-}
+.navbar-nav {
+    a {
+        text-align: center;
+        padding: 5px;
+        margin: 0.5rem;
 
-.navbar-nav a:hover {
-    background-color: $main-bg-color-t;
+        &:hover {
+            background-color: $main-bg-color-t;
+        }
+    }
 }
 
 .header__boots {

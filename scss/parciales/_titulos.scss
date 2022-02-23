@@ -9,10 +9,71 @@
         text-align: center;
         color: $main-font-color;
         padding: 0.5rem;
-        // margin-top: 1rem; // Por el momento comento este margen superior. emoroni.
+        margin-top: 1rem; // Por el momento comento este margen superior. emoroni.
         margin-bottom: 1rem;
         margin-left: 4rem;
         margin-right: 4rem;
+        border-bottom: 1px solid $main-font-color;
+    }
+}
+
+// Pie del título principal del index.html
+
+.main-section__parrafo {
+    p {
+        font-family: 'Roboto', sans-serif;
+        font-size: medium;
+        font-weight: bolder;
+        text-align: center;
+        color: $main-font-color;
+        margin-top: 1rem;
+        margin-left: 4rem;
+        margin-right: 4rem;
+    }
+}
+
+// Tarjetas con valores del index.html
+
+.value-section {
+    width: 100%;
+    margin: 0 1rem 1rem 1rem;
+
+    i {
+        display: inline-block;
+        color: $main-font-color;
+        font-size: 3rem;
+        margin: 1rem;
+    }
+
+    p {
+        color: $main-font-color;
+        font-family: 'Roboto', sans-serif;
+        font-size: medium;
+        font-weight: bolder;
+    }
+}
+
+// Servicios, REPASAR
+
+.servicios h1 {
+    margin-top: 0rem;
+}
+
+// Vínculo a la página de alta de usuario
+
+.signIn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    a {
+        width: auto;
+        font-family: 'Catamaran', sans-serif;
+        font-size: large;
+        text-align: center;
+        color: $main-font-color;
+        margin-top: 1rem;
+        margin-bottom: 4rem;
         border-bottom: 1px solid $main-font-color;
     }
 }
