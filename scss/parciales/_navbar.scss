@@ -1,6 +1,6 @@
 @import "./variable";
 
-// Flexboxs
+// Flexboxs REV.OK 23/02/2022
 
 .row__personal {
     display: flex;
@@ -12,6 +12,7 @@
 
     &--valores {
         margin-bottom: 4rem;
+        align-items: flex-start;
     }
 
     &--foot {
@@ -20,11 +21,12 @@
     }
 }
 
-.col__personal {
-    flex-basis: 100%;
-    margin: 0 1rem 1rem 1rem;
-    align-items: center;
-}
+// Comentada, revisar. emoroni.
+// .col__personal {
+//     flex-basis: 100%;
+//     margin: 0 1rem 1rem 1rem;
+//     align-items: center;
+// }
 
 .col {
     /* Podría reemplazar esta propiedad con un width del 100%. */
@@ -32,14 +34,31 @@
     margin: 0 1rem 1rem 1rem;
 }
 
-// Navbar
+// Navbar - REV.OK 23/02/2022
+
+.header__boots {
+    background-color: $main-bg-color;
+    padding: 5px;
+    margin: auto;
+    font-family: 'Comfortaa', cursive;
+    font-size: 1rem;
+
+    // Este modificador es empleado para cambiar el color de fondo en la página de alta de usuario. emoroni.
+    &--alta-usuario {
+        background-color: $main-bg-color-alta-usuario;
+    }
+}
+
+.navbar {
+
+    // Esto lo hago para que cuando la pantalla esté por debajo del breakpoint, el botón desplegable se coloque a la derecha. emoroni. 
+    .container-fluid {
+        justify-content: end;
+    }
+}
 
 .navbar-collapse {
     justify-content: center;
-}
-
-.navbar>.container-fluid {
-    justify-content: end;
 }
 
 .navbar-nav {
@@ -54,55 +73,27 @@
     }
 }
 
-.header__boots {
-    background-color: $main-bg-color;
-    padding: 5px;
-    margin: auto;
-    font-family: 'Comfortaa', cursive;
-    font-size: 1rem;
+// Footer - REV.OK 23/02/2022
 
-    &--alta-usuario {
-        background-color: $main-bg-color-alta-usuario;
-    }
-}
-
-header,
 footer {
     width: 100%;
     background-color: $main-bg-color;
     overflow: hidden;
-}
-
-footer {
     position: fixed;
     bottom: 0%;
 }
 
-/* .header__nav, */
 .footer__nav {
     height: 3.5rem;
     display: grid;
     grid-template-columns: 20vw auto 20vw;
     justify-content: stretch;
-}
 
-/* Esto fue empleado en una versión anterior del header. emoroni. */
-/* .header__nav ul li {
-    text-align: center;
-    padding: 5px;
-    margin: auto;
-    font-family: 'Comfortaa', cursive;
-    font-size: 1rem;
-}
-
-.header__nav ul li:hover {
-    background-color: var(--main-bg-color-t);
-} */
-
-.footer__nav ul li {
-    font-size: 2rem;
-    padding: 5px;
-    margin: 0px 10px 0px 10px;
+    ul li {
+        font-size: 2rem;
+        padding: 5px;
+        margin: 0px 10px 0px 10px;
+    }
 }
 
 .fa-facebook-square:hover {

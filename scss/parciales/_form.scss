@@ -7,18 +7,10 @@
     padding: 1rem;
     background-color: $font-color;
 
-    &--alta-usuario {
-        background-color: $font-color-alta-usuario;
-    }
-
     label {
         font-family: 'Comfortaa', cursive;
         font-size: 1rem;
         color: $main-bg-color;
-    }
-
-    &--alta-usuario label {
-        color: $main-bg-color-alta-usuario;
     }
 
     button {
@@ -30,6 +22,14 @@
         font-family: 'Comfortaa', cursive;
         background-color: $main-bg-color;
         color: $font-color;
+    }
+
+    &--alta-usuario {
+        background-color: $font-color-alta-usuario;
+    }
+
+    &--alta-usuario label {
+        color: $main-bg-color-alta-usuario;
     }
 
     &--alta-usuario button {
@@ -44,8 +44,7 @@
     background-color: $font-color;
 
     label {
-        font-family: 'Comfortaa',
-            cursive;
+        font-family: 'Comfortaa', cursive;
         font-size: 1rem;
         color: $main-bg-color;
     }

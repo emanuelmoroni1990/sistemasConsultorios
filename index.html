@@ -1,11 +1,17 @@
-<!-- Cuarto y quinto desafío entregable; Curso de Desarrollo Web -->
+<!-- Sexto desafío entregable; Curso de Desarrollo Web -->
 <!-- Coder House; Emanuel Moroni-->
 
 <!-- 
     Consignas: 
-    - Utilización de transiciones √
-    - Utilización de Bootstrap √
-    - Full responsive √
+    - Instalación de SASS y creación del archivo SCSS. √
+    - Generación de parciales √
+    - Utilización de variables √
+    - Utilización de nesting √
+
+    Comentario importante:
+    - Se utilizará el archivo style_user.css como archivo de estilo. El original style.css solo se conservará a modo de back up para comparar en el proceso de migración.
+
+    REV. OK. 23/02/2022
 -->
 
 <!DOCTYPE html>
@@ -42,13 +48,13 @@
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a href="./index.html">Home</a>
-                    <a href="./pages/servicios.html">Servicios</a>
-                    <a href="./pages/nosotros.html">Sobre Nosotros</a>
-                    <a href="./pages/contacto.html">Contacto</a>
-                    <a href="./pages/login.html">Gestión Personal</a>
-                </div>
+                    <div class="navbar-nav">
+                        <a href="./index.html">Home</a>
+                        <a href="./pages/servicios.html">Servicios</a>
+                        <a href="./pages/nosotros.html">Sobre Nosotros</a>
+                        <a href="./pages/contacto.html">Contacto</a>
+                        <a href="./pages/login.html">Gestión Personal</a>
+                    </div>
                 </div>
             </div>
             <hr>
@@ -126,10 +132,10 @@
             <div class="footer__nav">
                 <div></div>
                 <ul class="row__personal row__personal--foot">
-                    <!-- Estos links por el momentos no redireccionan a ninguna red social. emoroni. -->
-                    <li class="col__foot"><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-                    <li class="col__foot"><a href="#"><i class="fa fa-whatsapp"></i></a></li>
-                    <li class="col__foot"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                    <!-- Quite las clases col__foot. TODO OK. REVISAR. emoroni. -->
+                    <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+                    <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                 </ul>
                 <div></div>
             </div>
