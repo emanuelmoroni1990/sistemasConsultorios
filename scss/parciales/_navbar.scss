@@ -107,3 +107,39 @@ footer {
 .fa-instagram:hover {
     color: rgba(131, 58, 180, 0.5);
 }
+
+// Medias querys
+
+@media (max-width: 900px) {
+
+    .footer__nav {
+        height: 3.5rem;
+        display: grid;
+        grid-template-columns: 15vw auto 15vw;
+        justify-content: stretch;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .footer__nav {
+        height: 3.5rem;
+        display: grid;
+        grid-template-columns: 10vw auto 10vw;
+        justify-content: stretch;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .row__personal {
+        flex-direction: column;
+        margin-left: 1rem;
+        margin-right: 1rem;
+
+        &--foot {
+            flex-direction: row;
+        }
+    }
+}

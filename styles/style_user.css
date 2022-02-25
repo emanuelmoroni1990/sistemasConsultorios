@@ -123,6 +123,28 @@ footer {
 .fa-instagram:hover {
   color: rgba(131, 58, 180, 0.5); }
 
+@media (max-width: 900px) {
+  .footer__nav {
+    height: 3.5rem;
+    display: grid;
+    grid-template-columns: 15vw auto 15vw;
+    justify-content: stretch; } }
+
+@media (max-width: 768px) {
+  .footer__nav {
+    height: 3.5rem;
+    display: grid;
+    grid-template-columns: 10vw auto 10vw;
+    justify-content: stretch; } }
+
+@media (max-width: 650px) {
+  .row__personal {
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-right: 1rem; }
+    .row__personal--foot {
+      flex-direction: row; } }
+
 .main-section__title h1 {
   font-family: 'Catamaran', sans-serif;
   font-size: xx-large;
@@ -181,6 +203,20 @@ footer {
     margin-bottom: 4rem;
     border-bottom: 1px solid #6c8575; }
 
+@media (max-width: 768px) {
+  .main-section__title h1 {
+    font-size: x-large; }
+  .value-section i {
+    font-size: 2rem; } }
+
+@media (max-width: 650px) {
+  .row__value {
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-right: 1rem; }
+  .value-section {
+    width: auto; } }
+
 .carousel-inner img {
   height: 350px;
   width: 100%;
@@ -193,6 +229,10 @@ footer {
   color: #336258;
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 0.5rem; }
+
+@media (max-width: 768px) {
+  .carousel-inner p {
+    font-size: large; } }
 
 .second-section {
   margin-bottom: 5rem; }
@@ -223,6 +263,7 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-basis: 100%;
     margin: 0 1rem 0rem 1rem; }
 
 #segundaImagen {
@@ -230,6 +271,39 @@ footer {
 
 #segundaDescripcion {
   order: 1; }
+
+@media (max-width: 768px) {
+  .second-section--row {
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-bottom: 0; }
+  .second-section--col {
+    margin: 0 1rem 1rem 1rem; }
+  #segundaImagen {
+    order: 1; }
+  #segundaDescripcion {
+    order: 2; } }
+
+@media (max-width: 650px) {
+  .second-section--row {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-bottom: 0; }
+  .second-section--col {
+    margin: 0 1rem 1rem 1rem; }
+    .second-section--col img {
+      width: 350px; } }
+
+@media (max-width: 320px) {
+  .second-section--row {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-bottom: 0; }
+  .second-section--col {
+    margin: 0 1rem 1rem 1rem; }
+    .second-section--col img {
+      width: 320px; } }
 
 .form__login {
   margin: 1rem;
@@ -287,68 +361,3 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: center; }
-
-/*
- * Medias Querys
- * max-width, hasta.
- * min-width, desde.
- */
-@media (max-width: 900px) {
-  .header__nav,
-  .footer__nav {
-    height: 3.5rem;
-    display: grid;
-    grid-template-columns: 15vw auto 15vw;
-    justify-content: stretch; } }
-
-@media (max-width: 768px) {
-  .header__nav,
-  .footer__nav {
-    height: 3.5rem;
-    display: grid;
-    grid-template-columns: 10vw auto 10vw;
-    justify-content: stretch; }
-  .main-section__title h1 {
-    font-size: x-large; }
-  .value-section i {
-    font-size: 2rem; }
-  .second-section--row {
-    flex-direction: column; }
-  #segundaImagen {
-    order: 1; }
-  #segundaDescripcion {
-    order: 2; }
-  .carousel-inner p {
-    font-size: large; } }
-
-@media (max-width: 650px) {
-  .row__personal {
-    flex-direction: column;
-    margin-left: 1rem;
-    margin-right: 1rem; }
-  .row__personal--foot {
-    flex-direction: row; }
-  .row__value {
-    flex-direction: column;
-    margin-left: 1rem;
-    margin-right: 1rem; }
-  .value-section {
-    width: auto; }
-  .second-section--col img {
-    width: 350px; }
-  .header__nav {
-    height: auto; }
-  .contact-section {
-    margin-left: 1rem;
-    margin-right: 1rem; }
-  .contact-section--row,
-  .contact-section--col,
-  .contact-section--button {
-    margin-left: 0;
-    margin-right: 0; }
-  .contact-section--col.consulta input {
-    height: 150px; } }
-
-@media (max-width: 320px) {
-  .second-section--col img {
-    width: 320px; } }

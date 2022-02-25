@@ -19,3 +19,12 @@
         border-radius: 0.5rem;
     }
 }
+
+// Medias querys
+
+@media (max-width: 768px) {
+
+    .carousel-inner p {
+        font-size: large;
+    }
+}

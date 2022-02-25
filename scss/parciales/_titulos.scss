@@ -88,3 +88,35 @@
         border-bottom: 1px solid $main-font-color;
     }
 }
+
+// Medias querys
+
+@media (max-width: 768px) {
+
+    .main-section__title {
+        h1 {
+            font-size: x-large;
+        }
+    }
+
+    .value-section {
+        i {
+            font-size: 2rem;
+        }
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .row__value {
+        // Creo que esta clase no la uso más, repasar.
+        flex-direction: column;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .value-section {
+        width: auto;
+    }
+}
