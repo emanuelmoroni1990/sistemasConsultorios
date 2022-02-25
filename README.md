@@ -1,6 +1,10 @@
 # Sistema de gestión de consultorios privados
 > Desarrollado por Emanuel Moroni
 
+## Comentarios sobre la cuarta y quinta entrega - 24/02/2022
+
+Se respeta el comportamiento de la presentación anterior pero empleando las herramientas estudiadas en la clase de SASSI. Además, se agrega el formulario para que el usuario se de alta.
+
 ## Comentarios sobre la cuarta y quinta entrega - 11/02/2022
 
 * Transiciones:
