@@ -1,45 +1,32 @@
 @import "./variable";
+@import "./mixins";
 
-// Tarjetas de servicios. REV. OK. 24/02/2022.
+// Tarjetas de servicios. REV. OK. 27/02/2022.
 
 .second-section {
     margin-bottom: 5rem;
 
     img {
-        height: 250px;
-        width: 400px;
-        object-fit: cover;
+        @include imgFormat (250px, 400px, cover);
     }
 
     h3 {
-        font-family: 'Catamaran', sans-serif;
-        font-size: larger;
-        text-align: center;
-        color: $main-font-color;
+        @include textFormat ($Catamaran, larger, center, $main-font-color, bold);
         margin: 0.25rem;
     }
 
     p {
-        color: $main-font-color;
-        font-family: 'Roboto', sans-serif;
-        font-size: medium;
-        font-weight: bolder;
+        @include textFormat ($Roboto, medium, center, $main-font-color, bolder);
     }
 
     &--row {
-        margin-top: 1rem;
-        margin-left: 4rem;
-        margin-right: 4rem;
-        margin-bottom: 0rem;
+        margin: 1rem 4rem 0rem 4rem;
         padding-bottom: 1rem;
         border-bottom: 1px solid $main-font-color;
     }
 
     &--col {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        @include flexFormat (flex, column, nowrap, center, center);
         flex-basis: 100%;
         margin: 0 1rem 0rem 1rem;
     }
@@ -65,7 +52,9 @@
         }
 
         &--col {
-            margin: 0 1rem 1rem 1rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
         }
     }
 
@@ -91,7 +80,8 @@
         }
 
         &--col {
-            margin: 0 1rem 1rem 1rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
 
             img {
                 width: 350px;
@@ -110,7 +100,8 @@
         }
 
         &--col {
-            margin: 0 1rem 1rem 1rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
 
             img {
                 width: 320px;

@@ -1,6 +1,7 @@
 @import "./variable";
+@import "./mixins";
 
-// Form de login. REV. OK. 24/02/2022.
+// Form de login. REV. OK. 27/02/2022.
 
 .form__login {
     margin: 1rem;
@@ -8,63 +9,43 @@
     background-color: $font-color;
 
     label {
-        font-family: 'Comfortaa', cursive;
-        font-size: 1rem;
-        color: $main-bg-color;
+        display: block;
+        @include textFormat ($Conforta, 1rem, start, $main-bg-color, normal);
     }
 
     button {
-        margin-top: 1.5rem;
-        margin-bottom: 1.5rem;
+        @include textFormat ($Conforta, 1rem, center, $font-color, normal);
+        margin: 1.5rem 0rem 1.5rem 0rem;
         height: 3rem;
         width: 75%;
-        align-items: center;
-        font-family: 'Comfortaa', cursive;
         background-color: $main-bg-color;
-        color: $font-color;
+        // align-items: center;
     }
 
     &--alta-usuario {
         background-color: $font-color-alta-usuario;
-    }
 
-    &--alta-usuario label {
-        color: $main-bg-color-alta-usuario;
-    }
+        label {
+            color: $main-bg-color-alta-usuario;
+        }
 
-    &--alta-usuario button {
-        background-color: $main-bg-color-alta-usuario;
+        button {
+            background-color: $main-bg-color-alta-usuario;
+        }
     }
 }
 
 .form__contacto {
-    margin: 1rem;
+    @extend .form__login;
     margin-bottom: 4rem;
-    padding: 1rem;
-    background-color: $font-color;
-
-    label {
-        font-family: 'Comfortaa', cursive;
-        font-size: 1rem;
-        color: $main-bg-color;
-    }
 
     textarea {
         height: 10vh;
         resize: none;
     }
-
-    button {
-        margin-top: 1.5rem;
-        margin-bottom: 1.5rem;
-        height: 3rem;
-        width: 75%;
-        align-items: center;
-        font-family: 'Comfortaa', cursive;
-        background-color: $main-bg-color;
-        color: $font-color;
-    }
 }
+
+// Repasar la definición de estas tres clases que siguen. 27/02/2022
 
 .form-group {
     margin-bottom: 1rem;
@@ -75,7 +56,5 @@
 }
 
 .row__button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    @include flexFormat (flex, row, nowrap, center, center);
 }

@@ -1,3 +1,14 @@
+// Fuentes empleadas
+
+$Catamaran: 'Catamaran',
+sans-serif;
+
+$Roboto: 'Roboto',
+sans-serif;
+
+$Conforta: 'Comfortaa',
+cursive;
+
 // Colores
 
 $main-bg-color: rgb(83, 158, 143);
@@ -7,3 +18,9 @@ $font-color: rgb(226, 232, 192);
 $font-color-alta-usuario: rgb(221, 231, 235);
 $carousel-font-color: rgb(51, 98, 88);
 $main-font-color: rgb(108, 133, 117);
+
+// Mapa de colores para iconos de redes sociales
+
+$redes: (facebook-square: rgba(59, 89, 152, 0.5),
+    whatsapp: rgba(74, 201, 89, 0.5),
+    instagram: rgba(131, 58, 180, 0.5));

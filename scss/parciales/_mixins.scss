@@ -1,0 +1,27 @@
+// flexFormat: mixin para la definicion de características presentadas en los diferentes flexboxs empleados en el desarrollo.
+
+@mixin flexFormat ($display, $direccion, $wrap, $justificacion, $alineacion) {
+    display: $display;
+    flex-direction: $direccion;
+    flex-wrap: $wrap;
+    justify-content: $justificacion;
+    align-items: $alineacion;
+}
+
+// textFormat: mixin para la definición de características presentadas en los diferentes textos del desarrollo.
+
+@mixin textFormat ($fuente, $tamano, $alineacion, $color, $peso) {
+    font-family: $fuente;
+    font-size: $tamano;
+    text-align: $alineacion;
+    color: $color;
+    font-weight: $peso;
+}
+
+// imgFormat: mixin para la definición de características presentadas en las diferentes imágenes del desarrollo.
+
+@mixin imgFormat ($alto, $ancho, $fit) {
+    height: $alto;
+    width: $ancho;
+    object-fit: $fit;
+}

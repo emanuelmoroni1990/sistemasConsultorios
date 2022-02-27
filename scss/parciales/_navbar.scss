@@ -1,14 +1,12 @@
 @import "./variable";
+@import "./mixins";
 
-// Flexboxs REV.OK 23/02/2022
+// Flexboxs REV.OK 27/02/2022
 
 .row__personal {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
+    @include flexFormat (flex, row, nowrap, center, center);
+    //align-items: flex-start; // Ver esto para el caso de los valores del index.html
     text-align: center;
-    align-items: center; //align-items: flex-start; // Ver esto para el caso de los valores del index.html
 
     &--valores {
         margin-bottom: 4rem;
@@ -21,27 +19,19 @@
     }
 }
 
-// Comentada, revisar. emoroni.
-// .col__personal {
-//     flex-basis: 100%;
-//     margin: 0 1rem 1rem 1rem;
-//     align-items: center;
-// }
-
 .col {
     /* Podría reemplazar esta propiedad con un width del 100%. */
     flex-basis: 100%;
     margin: 0 1rem 1rem 1rem;
 }
 
-// Navbar - REV.OK 23/02/2022
+// Navbar - REV.OK 27/02/2022
 
 .header__boots {
+    @include textFormat ($Conforta, 1rem, center, $font-color, normal);
     background-color: $main-bg-color;
     padding: 5px;
     margin: auto;
-    font-family: 'Comfortaa', cursive;
-    font-size: 1rem;
 
     // Este modificador es empleado para cambiar el color de fondo en la página de alta de usuario. emoroni.
     &--alta-usuario {
@@ -96,16 +86,25 @@ footer {
     }
 }
 
-.fa-facebook-square:hover {
-    color: rgba(59, 89, 152, 0.5);
-}
+// .fa-facebook-square:hover {
+//     color: rgba(59, 89, 152, 0.5);
+// }
 
-.fa-whatsapp:hover {
-    color: rgba(74, 201, 89, 0.5);
-}
+// .fa-whatsapp:hover {
+//     color: rgba(74, 201, 89, 0.5);
+// }
 
-.fa-instagram:hover {
-    color: rgba(131, 58, 180, 0.5);
+// .fa-instagram:hover {
+//     color: rgba(131, 58, 180, 0.5);
+// }
+
+// Utilización de los valores del mapa redes. emoroni.
+
+@each $red,
+$color in $redes {
+    .fa-#{$red}:hover {
+        color: $color;
+    }
 }
 
 // Medias querys
@@ -113,10 +112,7 @@ footer {
 @media (max-width: 900px) {
 
     .footer__nav {
-        height: 3.5rem;
-        display: grid;
         grid-template-columns: 15vw auto 15vw;
-        justify-content: stretch;
     }
 
 }
@@ -124,10 +120,7 @@ footer {
 @media (max-width: 768px) {
 
     .footer__nav {
-        height: 3.5rem;
-        display: grid;
         grid-template-columns: 10vw auto 10vw;
-        justify-content: stretch;
     }
 }
 

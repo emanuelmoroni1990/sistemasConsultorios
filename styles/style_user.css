@@ -61,8 +61,8 @@ li {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
-  text-align: center;
-  align-items: center; }
+  align-items: center;
+  text-align: center; }
   .row__personal--valores {
     margin-bottom: 4rem;
     align-items: flex-start; }
@@ -76,11 +76,14 @@ li {
   margin: 0 1rem 1rem 1rem; }
 
 .header__boots {
+  font-family: "Comfortaa", cursive;
+  font-size: 1rem;
+  text-align: center;
+  color: #e2e8c0;
+  font-weight: normal;
   background-color: #539e8f;
   padding: 5px;
-  margin: auto;
-  font-family: 'Comfortaa', cursive;
-  font-size: 1rem; }
+  margin: auto; }
   .header__boots--alta-usuario {
     background-color: #53839e; }
 
@@ -125,17 +128,11 @@ footer {
 
 @media (max-width: 900px) {
   .footer__nav {
-    height: 3.5rem;
-    display: grid;
-    grid-template-columns: 15vw auto 15vw;
-    justify-content: stretch; } }
+    grid-template-columns: 15vw auto 15vw; } }
 
 @media (max-width: 768px) {
   .footer__nav {
-    height: 3.5rem;
-    display: grid;
-    grid-template-columns: 10vw auto 10vw;
-    justify-content: stretch; } }
+    grid-template-columns: 10vw auto 10vw; } }
 
 @media (max-width: 650px) {
   .row__personal {
@@ -146,29 +143,25 @@ footer {
       flex-direction: row; } }
 
 .main-section__title h1 {
-  font-family: 'Catamaran', sans-serif;
+  font-family: "Catamaran", sans-serif;
   font-size: xx-large;
   text-align: center;
   color: #6c8575;
+  font-weight: bold;
   padding: 0.5rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  margin-left: 4rem;
-  margin-right: 4rem;
+  margin: 1rem 4rem 1rem 4rem;
   border-bottom: 1px solid #6c8575; }
 
 .main-section__title--servicios h1 {
   margin-top: 0rem; }
 
 .main-section__parrafo p {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: medium;
-  font-weight: bolder;
   text-align: center;
   color: #6c8575;
-  margin-top: 1rem;
-  margin-left: 4rem;
-  margin-right: 4rem; }
+  font-weight: bolder;
+  margin: 1rem 4rem 0rem 4rem; }
 
 .main-section video {
   margin-top: 1rem;
@@ -184,9 +177,10 @@ footer {
     font-size: 2.5rem;
     margin: 1rem; }
   .value-section p {
-    color: #6c8575;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 0.9rem;
+    text-align: center;
+    color: #6c8575;
     font-weight: bolder; }
 
 .signIn {
@@ -194,11 +188,12 @@ footer {
   flex-direction: column;
   align-items: center; }
   .signIn a {
-    width: auto;
-    font-family: 'Catamaran', sans-serif;
+    font-family: "Catamaran", sans-serif;
     font-size: large;
     text-align: center;
     color: #6c8575;
+    font-weight: normal;
+    width: auto;
     margin-top: 1rem;
     margin-bottom: 4rem;
     border-bottom: 1px solid #6c8575; }
@@ -223,10 +218,12 @@ footer {
   object-fit: cover; }
 
 .carousel-inner p {
-  width: auto;
-  font-family: 'Catamaran', sans-serif;
+  font-family: "Catamaran", sans-serif;
   font-size: x-large;
+  text-align: center;
   color: #336258;
+  font-weight: normal;
+  width: auto;
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 0.5rem; }
 
@@ -241,28 +238,28 @@ footer {
     width: 400px;
     object-fit: cover; }
   .second-section h3 {
-    font-family: 'Catamaran', sans-serif;
+    font-family: "Catamaran", sans-serif;
     font-size: larger;
     text-align: center;
     color: #6c8575;
+    font-weight: bold;
     margin: 0.25rem; }
   .second-section p {
-    color: #6c8575;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: medium;
+    text-align: center;
+    color: #6c8575;
     font-weight: bolder; }
   .second-section--row {
-    margin-top: 1rem;
-    margin-left: 4rem;
-    margin-right: 4rem;
-    margin-bottom: 0rem;
+    margin: 1rem 4rem 0rem 4rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid #6c8575; }
   .second-section--col {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    flex-wrap: nowrap;
     justify-content: center;
+    align-items: center;
     flex-basis: 100%;
     margin: 0 1rem 0rem 1rem; }
 
@@ -279,7 +276,9 @@ footer {
     margin-right: 1rem;
     padding-bottom: 0; }
   .second-section--col {
-    margin: 0 1rem 1rem 1rem; }
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem; }
   #segundaImagen {
     order: 1; }
   #segundaDescripcion {
@@ -291,7 +290,8 @@ footer {
     margin-right: 1rem;
     padding-bottom: 0; }
   .second-section--col {
-    margin: 0 1rem 1rem 1rem; }
+    margin-left: 1rem;
+    margin-right: 1rem; }
     .second-section--col img {
       width: 350px; } }
 
@@ -301,55 +301,44 @@ footer {
     margin-right: 1rem;
     padding-bottom: 0; }
   .second-section--col {
-    margin: 0 1rem 1rem 1rem; }
+    margin-left: 1rem;
+    margin-right: 1rem; }
     .second-section--col img {
       width: 320px; } }
 
-.form__login {
+.form__login, .form__contacto {
   margin: 1rem;
   padding: 1rem;
   background-color: #e2e8c0; }
-  .form__login label {
-    font-family: 'Comfortaa', cursive;
+  .form__login label, .form__contacto label {
+    display: block;
+    font-family: "Comfortaa", cursive;
     font-size: 1rem;
-    color: #539e8f; }
-  .form__login button {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    text-align: start;
+    color: #539e8f;
+    font-weight: normal; }
+  .form__login button, .form__contacto button {
+    font-family: "Comfortaa", cursive;
+    font-size: 1rem;
+    text-align: center;
+    color: #e2e8c0;
+    font-weight: normal;
+    margin: 1.5rem 0rem 1.5rem 0rem;
     height: 3rem;
     width: 75%;
-    align-items: center;
-    font-family: 'Comfortaa', cursive;
-    background-color: #539e8f;
-    color: #e2e8c0; }
+    background-color: #539e8f; }
   .form__login--alta-usuario {
     background-color: #dde7eb; }
-  .form__login--alta-usuario label {
-    color: #53839e; }
-  .form__login--alta-usuario button {
-    background-color: #53839e; }
+    .form__login--alta-usuario label {
+      color: #53839e; }
+    .form__login--alta-usuario button {
+      background-color: #53839e; }
 
 .form__contacto {
-  margin: 1rem;
-  margin-bottom: 4rem;
-  padding: 1rem;
-  background-color: #e2e8c0; }
-  .form__contacto label {
-    font-family: 'Comfortaa', cursive;
-    font-size: 1rem;
-    color: #539e8f; }
+  margin-bottom: 4rem; }
   .form__contacto textarea {
     height: 10vh;
     resize: none; }
-  .form__contacto button {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    height: 3rem;
-    width: 75%;
-    align-items: center;
-    font-family: 'Comfortaa', cursive;
-    background-color: #539e8f;
-    color: #e2e8c0; }
 
 .form-group {
   margin-bottom: 1rem; }
@@ -360,4 +349,6 @@ footer {
 .row__button {
   display: flex;
   flex-direction: row;
-  justify-content: center; }
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center; }
