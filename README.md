@@ -3,7 +3,21 @@
 
 ## Comentarios sobre la sexta entrega - 03/03/2022
 
+* Utilización de maps:
+    - En el archivo _navbar.scss se utiilza un mapa para definir los colores que corresponden a los íconos de footer cuando sobre los mismos se encuentra el cursor. Los colores se corresponden con sus respectivos valores empleados en las redes sociales.
 
+* Utilización de extends:
+    - En el archivo _form.scss se utiliza un extend para que la clase form__contacto herede de la clase form__login todas sus propiedades. En la entrega anterior estas clases se desarrollaron por separado y se podía ver con claridad cuan similares resultaron. Por este motivo se aplicó el extend y se colocaron las propiedades particulares sobre la clase form__contacto.
+
+* Utilización de mixins:
+    - El recurso mixins se utilizó a lo largo de todo el desarrollo motivo por el que se creó un nuevo parcial con el nombre de _mixins.scss. Fueron creados los siguientes,
+        1. flexFormat
+        2. textFormat
+        3. imgFormat
+
+* Desarrollo de SEO:
+    - Utilización de descripción. Se colocó la siguiente descripción, "Consultorios médicos privados. Sistema de gestión integrado para el seguimiento personalizado de pacientes."
+    - Utilización de keywords. Se colocaron las siguientes palabras clave, consultorios médicos, consultorios medicos, turnos, paciente y medicina.
 
 ## Comentarios sobre la cuarta y quinta entrega - 24/02/2022
 
