@@ -17,7 +17,9 @@
 
 * Desarrollo de SEO:
     - Utilización de descripción. Se colocó la siguiente descripción, "Consultorios médicos privados. Sistema de gestión integrado para el seguimiento personalizado de pacientes."
-    - Utilización de keywords. Se colocaron las siguientes palabras clave, consultorios médicos, consultorios medicos, turnos, paciente y medicina.
+    - Utilización de keywords. Se colocaron en los archivos index, nosotros y contacto.html las siguientes palabras clave, consultorios médicos, consultorios medicos, turnos, paciente y medicina. En los archivos restantes se colocaron consulta, contacto y sistema de gestión.
+    - Se modificaron los títulos de alta_usuario, contacto y login.html.
+    - Todas las páginas cuentan con un título implementado con un h1. Y, además, servicios.html cuenta con los encabezados h3 en donde se listan los servicios brindados.
 
 ## Comentarios sobre la cuarta y quinta entrega - 24/02/2022
 
