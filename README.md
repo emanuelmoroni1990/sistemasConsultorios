@@ -21,6 +21,10 @@
     - Se modificaron los títulos de alta_usuario, contacto y login.html.
     - Todas las páginas cuentan con un título implementado con un h1. Y, además, servicios.html cuenta con los encabezados h3 en donde se listan los servicios brindados.
 
+* Reporte Ligth House:
+
+![reporteLH](./reporteLigthHouse.png)
+
 ## Comentarios sobre la cuarta y quinta entrega - 24/02/2022
 
 Se respeta el comportamiento de la presentación anterior pero empleando las herramientas estudiadas en la clase de SASSI. Además, se agrega el formulario para que el usuario se de alta.
