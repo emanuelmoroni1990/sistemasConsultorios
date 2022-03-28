@@ -1,6 +1,28 @@
 @import "./variable";
 @import "./mixins";
 
+// Imagenes de los consultorios
+
+.img-section {
+
+    &__col {
+        @include flexFormat (flex, column, nowrap, space-evenly, center);
+
+        padding: 0.5rem;
+        margin: 1rem 4rem 1rem 4rem;
+        border-bottom: 1px solid $main-font-color;
+    }
+
+    img {
+        @include imgFormat (400px, 600px, cover);
+        margin-bottom: 1rem;
+    }
+}
+
+#ultimaImagen {
+    margin-bottom: 4.5rem;
+}
+
 // Tarjetas de servicios. REV. OK. 27/02/2022.
 
 .second-section {
@@ -70,6 +92,13 @@
 
 @media (max-width: 650px) {
 
+    .img-section {
+        img {
+            @include imgFormat (300px, 350px, cover);
+            margin-bottom: 1rem;
+        }
+    }
+
     .second-section {
         // Estoy perdiendo la propiedad de row_personal y tengo que volver a escrirlo acá, pero no encuentro porque. emoroni.
 
@@ -91,6 +120,13 @@
 }
 
 @media (max-width: 320px) {
+
+    .img-section {
+        img {
+            @include imgFormat (250px, 300px, cover);
+            margin-bottom: 1rem;
+        }
+    }
 
     .second-section {
         &--row {

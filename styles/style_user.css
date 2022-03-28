@@ -183,6 +183,40 @@ footer {
     color: #6c8575;
     font-weight: bolder; }
 
+.aboutUs-section--row {
+  justify-content: space-evenly; }
+
+.aboutUs-section__googleMaps iframe {
+  width: 60vw;
+  height: 60vh; }
+
+.aboutUs-section__info h3 {
+  font-family: "Catamaran", sans-serif;
+  font-size: larger;
+  text-align: center;
+  color: #6c8575;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin: 1rem 4rem 1rem 4rem;
+  border-bottom: 1px solid #6c8575; }
+
+.aboutUs-section__info p,
+.aboutUs-section__info a {
+  font-family: "Roboto", sans-serif;
+  font-size: medium;
+  text-align: center;
+  color: #6c8575;
+  font-weight: bolder; }
+
+#primerTitulo {
+  margin-top: 0rem; }
+
+#googleMap {
+  order: 1; }
+
+#infoGeneral {
+  order: 2; }
+
 .signIn {
   display: flex;
   flex-direction: column;
@@ -210,7 +244,17 @@ footer {
     margin-left: 1rem;
     margin-right: 1rem; }
   .value-section {
-    width: auto; } }
+    width: auto; }
+  .aboutUs-section--row {
+    margin-bottom: 4.5rem; }
+  .aboutUs-section__googleMaps iframe {
+    margin-top: 1rem;
+    width: 80vw;
+    height: 30vh; }
+  #googleMap {
+    order: 2; }
+  #infoGeneral {
+    order: 1; } }
 
 .carousel-inner img {
   height: 350px;
@@ -230,6 +274,25 @@ footer {
 @media (max-width: 768px) {
   .carousel-inner p {
     font-size: large; } }
+
+.img-section__col {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.5rem;
+  margin: 1rem 4rem 1rem 4rem;
+  border-bottom: 1px solid #6c8575; }
+
+.img-section img {
+  height: 400px;
+  width: 600px;
+  object-fit: cover;
+  margin-bottom: 1rem; }
+
+#ultimaImagen {
+  margin-bottom: 4.5rem; }
 
 .second-section {
   margin-bottom: 5rem; }
@@ -285,6 +348,11 @@ footer {
     order: 2; } }
 
 @media (max-width: 650px) {
+  .img-section img {
+    height: 300px;
+    width: 350px;
+    object-fit: cover;
+    margin-bottom: 1rem; }
   .second-section--row {
     margin-left: 1rem;
     margin-right: 1rem;
@@ -296,6 +364,11 @@ footer {
       width: 350px; } }
 
 @media (max-width: 320px) {
+  .img-section img {
+    height: 250px;
+    width: 300px;
+    object-fit: cover;
+    margin-bottom: 1rem; }
   .second-section--row {
     margin-left: 1rem;
     margin-right: 1rem;

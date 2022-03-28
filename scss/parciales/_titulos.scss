@@ -58,6 +58,52 @@
     }
 }
 
+// Sección de aboutUs
+
+.aboutUs-section {
+
+    &--row {
+        justify-content: space-evenly;
+    }
+
+    &__googleMaps {
+        iframe {
+            width: 60vw;
+            height: 60vh;
+        }
+    }
+
+    &__info {
+
+        h3 {
+            @include textFormat ($Catamaran, larger, center, $main-font-color, bold);
+
+            padding: 0.5rem;
+            margin: 1rem 4rem 1rem 4rem;
+            border-bottom: 1px solid $main-font-color;
+        }
+
+        p,
+        a {
+            @include textFormat ($Roboto, medium, center, $main-font-color, bolder);
+        }
+    }
+
+}
+
+#primerTitulo {
+    margin-top: 0rem;
+}
+
+#googleMap {
+    order: 1;
+}
+
+#infoGeneral {
+    order: 2;
+}
+
+
 // Vínculo a la página de alta de usuario
 
 .signIn {
@@ -104,5 +150,28 @@
 
     .value-section {
         width: auto;
+    }
+
+    .aboutUs-section {
+
+        &--row {
+            margin-bottom: 4.5rem;
+        }
+
+        &__googleMaps {
+            iframe {
+                margin-top: 1rem;
+                width: 80vw;
+                height: 30vh;
+            }
+        }
+    }
+
+    #googleMap {
+        order: 2;
+    }
+
+    #infoGeneral {
+        order: 1;
     }
 }

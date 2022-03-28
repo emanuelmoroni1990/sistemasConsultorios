@@ -1,10 +1,3 @@
-<!-- Sexto desafío entregable; Curso de Desarrollo Web -->
-<!-- Coder House; Emanuel Moroni-->
-
-<!-- 
-    REV. OK. 01/03/2022
--->
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -60,20 +53,12 @@
             </div>
         </section>
 
-        <section class="aboutUs-section">
-            <div class="row__personal aboutUs-section--row">
-                <div id="googleMap" class="aboutUs-section__googleMaps">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6602.66385656506!2d-58.9595426090691!3d-34.163430286469385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1648425486109!5m2!1ses-419!2sar" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-                <div id="infoGeneral" class="aboutUs-section__info">
-                    <h3 id="primerTitulo">Dirección</h3>
-                    <p>Rawson, esquina 25 de Mayo. Campana, Buenos Aires.</p>
-                    <h3>Teléfono</h3>
-                    <p>03489412345</p>
-                    <h3>Nuestros consultorios</h3>
-                    <p><a href="./consultorios.html">Aquí puede ver algunas de nuestras fotos</a></p>
-                </div>
-            </div>           
+        <section class="img-section">
+            <div class="img-section__col">
+                <img src="../media/nuestrosConsultorios/consultorio_1.jpg" alt="Ups..." data-aos="fade-up" data-os-duration="5000">
+                <img src="../media/nuestrosConsultorios/consultorio_2.jpg" alt="Ups..." data-aos="fade-up" data-os-duration="5000">
+                <img id="ultimaImagen" src="../media/nuestrosConsultorios/consultorio_3.jpg" alt="Ups..." data-aos="fade-up" data-os-duration="5000">
+            </div>            
         </section>
 
         <footer class="footer">
@@ -91,5 +76,9 @@
             <hr>
         </footer>  
 
+        <script>
+            AOS.init();
+        </script>
+        
     </body>
 </html>
