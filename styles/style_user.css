@@ -184,6 +184,8 @@ footer {
     font-weight: bolder; }
 
 .aboutUs-section--row {
+  margin-left: 1rem;
+  margin-right: 1rem;
   justify-content: space-evenly; }
 
 .aboutUs-section__googleMaps iframe {
@@ -289,7 +291,9 @@ footer {
   height: 400px;
   width: 600px;
   object-fit: cover;
-  margin-bottom: 1rem; }
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #6c8575; }
 
 #ultimaImagen {
   margin-bottom: 4.5rem; }
