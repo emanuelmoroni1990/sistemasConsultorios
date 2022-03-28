@@ -1,6 +1,16 @@
 # Sistema de gestión de consultorios privados
 > Desarrollado por Emanuel Moroni
 
+## Entrega final - 28/03/2022
+
+Se adjunta un archivo de rúbrica en donde se hace un seguimiento de los items pedidos.
+
+* Imágenes representativas del desarrollo final
+
+![mobile](./mediaReadme/mobile.PNG)
+
+![desktop](./mediaReadme/desktop.PNG)
+
 ## Comentarios sobre la sexta entrega - 03/03/2022
 
 * Utilización de maps:
@@ -23,7 +33,7 @@
 
 * Reporte Ligth House:
 
-![reporteLH](./reporteLigthHouse.png)
+![reporteLH](./mediaReadme/reporteLigthHouse.png)
 
 ## Comentarios sobre la cuarta y quinta entrega - 24/02/2022
 
