@@ -53,7 +53,22 @@
         
         <section class="form__login form__login--alta-usuario">
             <form class="row">
-                <div class="col-md-6 col__login">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Dirección de correo electrónico</label>
+                    <input type="email" class="form-control" id="correoId" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="passwordId">
+                </div>
+                 <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Repetición de la contraseña</label>
+                    <input type="password" class="form-control" id="passwordCheckId">
+                </div>
+                <div class="row__button">
+                    <button type="button" class="btn button_login" id="altaButtonId">Dar de alta</button>
+                </div>
+                <!-- <div class="col-md-6 col__login">
                     <label for="inputNombreUsuario" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="inputNombreUsuario">
                 </div>
@@ -91,9 +106,11 @@
                     <input type="password" class="form-control" id="inputPasswordCheck">
                 </div>
                 <div class="row__button">
-                    <button type="submit" class="btn button_login">Alta usuario</button>
-                </div>
+                    <button type="button" class="btn button_login" id="botonAltaPaciente">Alta usuario</button>
+                </div> -->
             </form>
         </section>
+
+        <script type="module" src="../script/script.js"></script>
     </body>
 </html>

@@ -1,0 +1,17 @@
+@import "./variable";
+@import "./mixins";
+
+.img-paciente{
+    height: 200px;
+    width: auto;
+    object-fit: cover;
+}
+
+.hr-personal{
+    margin-top: 7rem;
+    margin-bottom: 7rem;
+}
+
+.card-text{
+    padding-bottom: 1rem;
+}
