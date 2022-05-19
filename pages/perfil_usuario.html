@@ -63,7 +63,7 @@
                                 <p class="card-text">Domicilio: <span id="domicilioId">Ejemplar 1</span></p>
                                 <p class="card-text">DNI: <span id="documentoId">Número de documento</span></p>
                                 <p class="card-text">Obra Social: <span id="obraSocialId">OS</span></p>
-                                <a href="#modificacionDatosId" class="btn btn-primary">Editar información personal</a>
+                                <button type="button" id="buttonModalUpdatePaciente" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar información personal</a>
                             </div>
                         </div>
                     </div>
@@ -83,8 +83,8 @@
                 </div>
             </div>            
         </section>
-
-        <hr class="hr-personal">
+ 
+        <!-- <hr class="hr-personal">
 
         <section id="modificacionDatosId">
             <div class="container" style="margin-top: 1rem;">
@@ -128,7 +128,59 @@
             </div>
         </div>
 
-        <hr class="hr-personal">
+        <hr class="hr-personal"> -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Información Personal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container"> <!-- style="margin-top: 1rem;"> -->
+                        <div class="row justify-content-center">
+                            <form class="col-lg-10 col-md-10 col-sm-10 col-12">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombrePaciente">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Apellido</label>
+                                    <input type="text" class="form-control" id="apellidoPaciente">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Domicilio</label>
+                                    <input type="text" class="form-control" id="domicilioPaciente">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="row justify-content-center">
+                            <form class="col-lg-5 col-md-5 col-sm-5 col-12">
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Documento (DNI)</label>
+                                    <input type="text" class="form-control" id="numeroDocumento">
+                                </div>
+                            </form>
+                            <form class="col-lg-5 col-md-5 col-sm-5 col-12">                                
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Obra Social</label>
+                                    <input type="text" class="form-control" id="obraSocial">
+                                </div>                    
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <button type="button" class="btn btn-success col-lg-8 col-md-8 col-sm-8 col-12" id="botonUpdate" style="margin: 1rem;" data-bs-dismiss="modal">Actualizar datos</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script type="module" src="../script/scriptPerfilUsuario.js"></script>
     </body>
