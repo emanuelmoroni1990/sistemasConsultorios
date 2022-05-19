@@ -41,11 +41,8 @@ onAuthStateChanged(auth, (user) => {
     .then((snapshot) => {
         if (snapshot.exists()) {
             console.log(snapshot.val());
-            nombrePacienteRef.innerHTML = snapshot.val().paciente.nombre;
-            apellidoPacienteRef.innerHTML = snapshot.val().paciente.apellido;
-            documentoPacienteRef.innerHTML = snapshot.val().paciente.documento;
-            domicilioPacienteRef.innerHTML = snapshot.val().paciente.domicilio;
-            obraSocialPacienteRef.innerHTML = snapshot.val().paciente.obraSocial;
+            localStorage.setItem("pacienteEnLinea", JSON.stringify(snapshot.val().paciente));
+            actualizarDatosActuales();
         } else {
             console.log("No data available");
         }
@@ -60,6 +57,8 @@ onAuthStateChanged(auth, (user) => {
     console.log("No hay usuario conectado.");
   }
 });
+
+
 
 
 // Referencias al DOM
@@ -88,6 +87,8 @@ let obraSocialRef = document.getElementById("obraSocial");
 
 let botonUpdateRef = document.getElementById("botonUpdate");
 botonUpdateRef.addEventListener("click", updatePaciente, false);
+
+let botonModalUpdateRef = document.getElementById("buttonModalUpdatePaciente");
 
 let numeroPaciente = 0;
 
@@ -179,11 +180,8 @@ function updatePaciente(){
         console.log("Información luego del update");
         console.log(pacientesDB[0]);
 
-        nombrePacienteRef.innerHTML = pacientesDB[0].nombre;
-        apellidoPacienteRef.innerHTML = pacientesDB[0].apellido;
-        documentoPacienteRef.innerHTML = pacientesDB[0].documento;
-        domicilioPacienteRef.innerHTML = pacientesDB[0].domicilio;
-        obraSocialPacienteRef.innerHTML = pacientesDB[0].obraSocial;
+        localStorage.setItem("pacienteEnLinea", JSON.stringify(pacientesDB[0]));
+        actualizarDatosActuales();
 
         nombreRef.value = "";
         apellidoRef.value = "";
@@ -196,4 +194,13 @@ function updatePaciente(){
     else{
         console.log("Repasar los campos ingresados."); 
     }  
+}
+
+function actualizarDatosActuales (){
+    const pacienteActual = JSON.parse(localStorage.getItem("pacienteEnLinea"));
+    nombrePacienteRef.innerHTML = pacienteActual.nombre;
+    apellidoPacienteRef.innerHTML = pacienteActual.apellido;
+    documentoPacienteRef.innerHTML = pacienteActual.documento;
+    domicilioPacienteRef.innerHTML = pacienteActual.domicilio;
+    obraSocialPacienteRef.innerHTML = pacienteActual.obraSocial;
 }
