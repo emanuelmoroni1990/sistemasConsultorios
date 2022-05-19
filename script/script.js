@@ -47,7 +47,6 @@ function altaUser (){
                 console.log(user);
                 window.close("./alta_usuario.html");
                 window.open("./perfil_usuario.html");
-                window.close("./alta_usuario.html");
             })
             .catch((error) => {
                 const errorCode = error.code;
