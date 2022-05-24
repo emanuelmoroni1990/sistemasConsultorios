@@ -22,14 +22,14 @@ const app = initializeApp(firebaseConfig);
 
 // API Docs: https://firebase.google.com/docs/reference/js/auth?hl=es&authuser=0#getauth
 const auth = getAuth();
-let userId;  
+let userId;
 
 // Get a reference to the database service; https://firebase.google.com/docs/database/web/start#initialize_the_javascript_sdk
 const database = getDatabase(app);
 console.log(database);
 
 onAuthStateChanged(auth, (user) => {
-  if (user) {
+    if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
     userId = user.uid;
@@ -38,28 +38,24 @@ onAuthStateChanged(auth, (user) => {
     // https://firebase.google.com/docs/database/web/read-and-write#read_data_once
 
     get(child(ref(database), 'users/' + userId))
-    .then((snapshot) => {
-        if (snapshot.exists()) {
-            console.log(snapshot.val());
-            localStorage.setItem("pacienteEnLinea", JSON.stringify(snapshot.val().paciente));
-            actualizarDatosActuales();
-        } else {
-            console.log("No data available");
-        }
-        })
-    .catch((error) => {
-        console.error(error);
-    });
-        
-
-  } else {
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val());
+                localStorage.setItem("pacienteEnLinea", JSON.stringify(snapshot.val().paciente));
+                actualizarDatosActuales();
+                console.log("User Logged in");
+            } else {
+                console.log("No data available");
+            }
+            })
+        .catch((error) => {
+            console.error(error);
+        });
+    } else {
     // User is signed out
     console.log("No hay usuario conectado.");
-  }
+    }
 });
-
-
-
 
 // Referencias al DOM
 
