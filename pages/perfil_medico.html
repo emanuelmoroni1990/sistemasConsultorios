@@ -20,15 +20,15 @@
                 <form class="col-lg-10 col-md-10 col-sm-10 col-12">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombrePaciente">
+                        <input type="text" class="form-control" id="nombreProfesional">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="apellidoPaciente">
+                        <input type="text" class="form-control" id="apellidoProfesional">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Domicilio</label>
-                        <input type="text" class="form-control" id="domicilioPaciente">
+                        <label for="exampleInputPassword1" class="form-label">Especialidad</label>
+                        <input type="text" class="form-control" id="especialidadProfesional">
                     </div>
                 </form>
             </div>
@@ -41,40 +41,43 @@
                 </form>
                 <form class="col-lg-5 col-md-5 col-sm-5 col-12">                                
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Obra Social</label>
-                        <input type="text" class="form-control" id="obraSocial">
+                        <label for="exampleInputPassword1" class="form-label">Matrícula (MP/MN)</label>
+                        <input type="text" class="form-control" id="matriculaProfesional">
                     </div>                    
                 </form>
             </div>
 
             <div class="row justify-content-center">
-                <ul class="class=col-lg-10 col-md-10 col-sm-10 col-12">
+                <ul class="class=col-lg-10 col-md-10 col-sm-10 col-12" style="margin-top: 1rem;">
                     <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                        <input class="form-check-input me-1" id="lunes" type="checkbox" value="" aria-label="...">
                         Lunes
                     </li>
                     <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                        <input class="form-check-input me-1" id="martes" type="checkbox" value="" aria-label="...">
                         Martes
                     </li>
                     <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                        <input class="form-check-input me-1" id="miercoles" type="checkbox" value="" aria-label="...">
                         Miércoles
                     </li>
                     <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                        <input class="form-check-input me-1" id="jueves" type="checkbox" value="" aria-label="...">
                         Jueves
                     </li>
                     <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                        <input class="form-check-input me-1" id="viernes" type="checkbox" value="" aria-label="...">
                         Viernes
                     </li>
                 </ul>
             </div>
-        </div>
 
+            <div class="row justify-content-center">
+                 <button type="button" class="btn btn-success col-lg-10 col-md-10 col-sm-10 col-12" id="botonUpdate" style="margin: 1rem;">Actualizar datos</button>
+            </div>
 
         <script src="https://cdn.jsdelivr.net/npm/luxon@2.4.0/build/global/luxon.min.js"></script>
-        <script src="../script/scriptPerfilMedico.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script type="module" src="../script/scriptPerfilMedico.js"></script>
     </body>
 </html>
