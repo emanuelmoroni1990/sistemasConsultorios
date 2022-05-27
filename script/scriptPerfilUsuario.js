@@ -3,7 +3,7 @@ console.log("Consola de pruebas - Sistema de gestión de consultorios privados")
 // ¿Qué es el atributo type="module" cuando agrago el script?
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import { getDatabase, ref, set, child, get } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+import { getDatabase, ref, set, child, get, query, orderByChild, onValue } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
 // ¿Cómo obtener esta información? https://firebase.google.com/docs/web/learn-more?authuser=0&hl=es#config-object
 
@@ -22,14 +22,14 @@ const app = initializeApp(firebaseConfig);
 
 // API Docs: https://firebase.google.com/docs/reference/js/auth?hl=es&authuser=0#getauth
 const auth = getAuth();
-let userId;  
+let userId;
 
 // Get a reference to the database service; https://firebase.google.com/docs/database/web/start#initialize_the_javascript_sdk
 const database = getDatabase(app);
 console.log(database);
 
 onAuthStateChanged(auth, (user) => {
-  if (user) {
+    if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
     userId = user.uid;
@@ -38,33 +38,84 @@ onAuthStateChanged(auth, (user) => {
     // https://firebase.google.com/docs/database/web/read-and-write#read_data_once
 
     get(child(ref(database), 'users/' + userId))
-    .then((snapshot) => {
-        if (snapshot.exists()) {
-            console.log(snapshot.val());
-            localStorage.setItem("pacienteEnLinea", JSON.stringify(snapshot.val().paciente));
-            actualizarDatosActuales();
-        } else {
-            console.log("No data available");
-        }
-        })
-    .catch((error) => {
-        console.error(error);
-    });
-        
-
-  } else {
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val());
+                localStorage.setItem("pacienteEnLinea", JSON.stringify(snapshot.val().paciente));
+                actualizarDatosActuales();
+                //actualizarDatosProfesionales();
+                console.log("User Logged in");
+            } else {
+                console.log("No data available");
+            }
+            })
+        .catch((error) => {
+            console.error(error);
+        });
+    } else {
     // User is signed out
     console.log("No hay usuario conectado.");
-  }
+    //actualizarDatosProfesionales();
+    }
 });
 
+const mostViewedPosts = query(ref(database, 'profesionales'), orderByChild('profesional/especialidad'));
 
+// console.log("Que obtengo de la query: ");
+// console.log(mostViewedPosts.toString());
 
+let divProfesionalesRef = document.getElementById("listadoProfesionales");
+let idReservar, reservarRef;
+
+onValue(mostViewedPosts, (snapshot) => {
+    snapshot.forEach((childSnapshot) => {
+        const childKey = childSnapshot.key;
+        const childData = childSnapshot.val();
+        console.log(childKey);
+        console.log(childData);
+
+        divProfesionalesRef.innerHTML += `
+
+            <div class="card" style="margin-bottom: 1rem;">
+                <div class="card-body">
+                    <h5 class="card-title"><span id="...">${childSnapshot.val().profesional.apellido}</span>, <span id="...">${childSnapshot.val().profesional.nombre}</span></h5>
+                    <h6 class="card-title">Matrícula: <span id="...">${childSnapshot.val().profesional.especialidad}</span></h6>
+                    <p class="card-text">Matrícula (MN/MP): <span id="...">${childSnapshot.val().profesional.matricula}</span></p>
+                    <button type="button" id="tomarTurno${childSnapshot.val().profesional.matricula}" class="reservar btn btn-warning" style="width: 100%;" data-bs-dismiss="modal">Resevar</button>
+                </div>
+            </div>
+
+        `;
+
+        // <button type="button" id="tomarTurno${childSnapshot.val().profesional.matricula}" class="reservar btn btn-warning" style="width: 100%;" >Resevar</button>
+
+        // idReservar = "tomarTurno" + childSnapshot.val().profesional.matricula; //.addEventListener('click', confirmarTurno);
+        // console.log("id: " + idReservar + " " + "tipo: " + typeof idReservar);
+        // reservarRef = document.getElementById(idReservar);
+        // console.log("ref: " + reservarRef);
+
+        // reservarRef.addEventListener('click', confirmarTurno);
+
+    });
+        
+    // Repasar esta parte. emoroni.
+
+    //document.getElementById("tomarTurnoId").addEventListener('click', confirmarTurno);
+
+    reservarRef = document.getElementsByClassName("reservar btn btn-warning");
+
+    for(let reserva of reservarRef) {
+        reserva.addEventListener('click', confirmarTurno);
+    }
+
+    }, {
+    onlyOnce: true
+});
 
 // Referencias al DOM
 
 let nombrePacienteRef = document.getElementById("nombreId");
-//console.log(nombrePacienteRef);
+console.log(nombrePacienteRef);
 let apellidoPacienteRef = document.getElementById("apellidoId");
 //console.log(apellidoPacienteRef);
 let domicilioPacienteRef = document.getElementById("domicilioId");
@@ -188,10 +239,24 @@ function updatePaciente(){
         obraSocialRef.value = "";
         domicioRef.value = "";
         documentoRef.value = "";
+
+        Swal.fire({
+            title: '¡Bien!',
+            text: 'Tu información fue actualizada.',
+            icon: 'success',
+            confirmButtonText: 'Continuar'
+        });
         
         console.log("Información actualizada.");
     }
-    else{
+    else{        
+        Swal.fire({
+            title: 'Algo no salió bien...',
+            text: 'Repasa todos los campos a completar',
+            icon: 'error',
+            confirmButtonText: 'Continuar'
+        });
+
         console.log("Repasar los campos ingresados."); 
     }  
 }
@@ -203,4 +268,34 @@ function actualizarDatosActuales (){
     documentoPacienteRef.innerHTML = pacienteActual.documento;
     domicilioPacienteRef.innerHTML = pacienteActual.domicilio;
     obraSocialPacienteRef.innerHTML = pacienteActual.obraSocial;
+}
+
+function confirmarTurno (){
+    Swal.fire({
+            title: '¡Bien!',
+            text: 'Turno confirmado con el profesional.',
+            icon: 'success',
+            confirmButtonText: 'Continuar'
+        });
+}
+
+function actualizarDatosProfesionales (){
+    get(child(ref(database), 'profesionales/'))
+        .then((snapshot) => {
+        if (snapshot.exists()) {
+            // var dato = snapshot.val();
+            // const array = new Array;
+            // console.log("Que hay en la base de datos: ");
+
+            // Object.keys(dato).forEach((key) => {
+            //     array.push({[key]: [key]});
+            // });
+
+            // console.log(array[1]);
+        } else {
+            console.log("No data available");
+        }
+        }).catch((error) => {
+        console.error(error);
+    });
 }
