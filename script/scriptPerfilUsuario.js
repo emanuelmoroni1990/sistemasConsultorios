@@ -249,7 +249,14 @@ function updatePaciente(){
         
         console.log("Información actualizada.");
     }
-    else{
+    else{        
+        Swal.fire({
+            title: 'Algo no salió bien...',
+            text: 'Repasa todos los campos a completar',
+            icon: 'error',
+            confirmButtonText: 'Continuar'
+        });
+
         console.log("Repasar los campos ingresados."); 
     }  
 }
