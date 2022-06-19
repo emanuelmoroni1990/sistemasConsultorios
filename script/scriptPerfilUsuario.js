@@ -28,6 +28,79 @@ let userId;
 const database = getDatabase(app);
 console.log(database);
 
+// Referencias al DOM
+
+let nombrePacienteRef = document.getElementById("nombreId");
+let apellidoPacienteRef = document.getElementById("apellidoId");
+let domicilioPacienteRef = document.getElementById("domicilioId");
+let documentoPacienteRef = document.getElementById("documentoId");
+let obraSocialPacienteRef = document.getElementById("obraSocialId");
+let nombreRef = document.getElementById("nombrePaciente");
+let apellidoRef = document.getElementById("apellidoPaciente");
+let documentoRef = document.getElementById("numeroDocumento");
+let domicioRef = document.getElementById("domicilioPaciente");
+let obraSocialRef = document.getElementById("obraSocial");
+
+let botonUpdateRef = document.getElementById("botonUpdate");
+botonUpdateRef.addEventListener("click", updatePaciente, false);
+
+let botonModalUpdateRef = document.getElementById("buttonModalUpdatePaciente");
+
+let numeroPaciente = 0;
+
+// Arrays a emplear
+
+const pacientesDB = [];
+const turnosDB = [];
+
+// Clases desarrolladas. Clase Turno y Paciente
+
+class Turno{
+
+    constructor(id, semanaAno, dia, horario, profesional, paciente){
+        this.id = id;
+        this.semanaAno = semanaAno;
+        this.horario = horario;
+        this.dia = dia;
+        this.profesional = profesional;
+        this.paciente = paciente;
+    }
+
+}
+
+class Paciente{
+    constructor (legajo, nombre, apellido, dni, domicilio, obraSocial)
+    {
+        this.legajo = legajo;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.documento = dni;
+        this.domicilio = domicilio;
+        this.obraSocial = obraSocial;
+    }
+
+    actualizarDatos (nombre, apellido, dni, domicilio, obraSocial){
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.documento = dni;
+        this.domicilio = domicilio;
+        this.obraSocial = obraSocial;
+    }
+
+    tomarTurno (id, especialista, paciente, fecha, horario, estado){
+        turnosDB.push(new Turno(id, especialista, paciente, fecha, horario, estado));
+    }
+
+    modificarTurno (id, fecha, horario){
+        turnosDB.forEach(turno => {if(turno.id == id){turno.fecha = fecha; turno.horario = horario;}});
+    }
+}
+
+// Agrego de manera inicial estos elementos a los arrays porque cuando el proyecto este más avanzado, el paciente al momento de ver el desarrollo compartido, será porque efectivamente ya habrá creado su cuenta y también, habrá tomado un turno.
+
+pacientesDB.push(new Paciente(numeroPaciente, "Nombre", "Apellido", 23456789, "Calle Ejemplar 1", "Obra Social"));
+turnosDB.push(new Turno(1234, "Médico clinico", 0, "12/06/2022", "12:00", "Tomado"));
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
     // User is signed in, see docs for a list of available properties
@@ -65,7 +138,7 @@ const mostViewedPosts = query(ref(database, 'profesionales'), orderByChild('prof
 // console.log(mostViewedPosts.toString());
 
 let divProfesionalesRef = document.getElementById("listadoProfesionales");
-let idReservar, reservarRef;
+let reservarRef, horariosRef;
 
 onValue(mostViewedPosts, (snapshot) => {
     snapshot.forEach((childSnapshot) => {
@@ -74,34 +147,119 @@ onValue(mostViewedPosts, (snapshot) => {
         console.log(childKey);
         console.log(childData);
 
-        divProfesionalesRef.innerHTML += `
+        let diaInfo = analisisHorario(diaDisponible(childSnapshot.val().profesional.dia));
+        let tagFinal, tagAux, flagPrimerDato = true, flagPrimerCalendario = true;
+
+        for(let i = 0; i < 5; i++){
+            // Esta es la condición generada de que en este día el profesional está trabajando en los consultorios.
+            if(diaInfo[i][0] == 1){
+                
+                if(i == 0){diaInfo[i][0] = "Lunes";}
+                if(i == 1){diaInfo[i][0] = "Martes";}
+                if(i == 2){diaInfo[i][0] = "Miércoles";}
+                if(i == 3){diaInfo[i][0] = "Jueves";}
+                if(i == 4){diaInfo[i][0] = "Viernes";}
+
+                for(let j = 1; j < 17; j++){
+                    if(diaInfo[i][j] != 0)
+                    {
+                        if(flagPrimerDato){
+                            tagAux = `
+                                <input class="horario form-check-input me-1" id="${diaInfo[i][0] + "-" + diaInfo[i][j]}" type="checkbox" value="" aria-label="...">
+                                <span>
+                                    ${diaInfo[i][j]}
+                                </span>                                        
+                            `;
+                            flagPrimerDato = false;
+                        }
+                        else{
+                            tagAux += `
+                                <input class="horario form-check-input me-1" id="${diaInfo[i][0] + "-" + diaInfo[i][j]}" type="checkbox" value="" aria-label="...">
+                                <span>
+                                    ${diaInfo[i][j]}
+                                </span>                                        
+                            `
+                        }
+                    }
+                }
+                
+                flagPrimerDato = true;
+                //console.log("tagAux: " + tagAux);
+
+                if(flagPrimerCalendario){
+                    tagFinal = `
+
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-12" style="margin-top: 1rem; margin-left: 0; padding: 0; width: 100%;">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading${childSnapshot.val().profesional.matricula + "-" + i}">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${childSnapshot.val().profesional.matricula + "-" + i}" aria-expanded="true" aria-controls="collapse${childSnapshot.val().profesional.matricula + "-" + i}">
+                                        ${diaInfo[i][0]}
+                                    </button>
+                                </h2>
+                                <div id="collapse${childSnapshot.val().profesional.matricula + "-" + i}" class="accordion-collapse collapse" aria-labelledby="heading${childSnapshot.val().profesional.matricula + "-" + i}" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        ` +
+
+                                        tagAux +
+                                    `    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                            
+                    `;
+                    flagPrimerCalendario = false;
+                }
+                else{
+                    tagFinal += `
+
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-12" style="margin-top: 1rem; margin-left: 0; padding: 0; width: 100%;">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading${childSnapshot.val().profesional.matricula + "-" + i}">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${childSnapshot.val().profesional.matricula + "-" + i}" aria-expanded="true" aria-controls="collapse${childSnapshot.val().profesional.matricula + "-" + i}">
+                                        ${diaInfo[i][0]}
+                                    </button>
+                                </h2>
+                                <div id="collapse${childSnapshot.val().profesional.matricula + "-" + i}" class="accordion-collapse collapse" aria-labelledby="heading$${childSnapshot.val().profesional.matricula + "-" + i}" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        ` +
+
+                                        tagAux +
+                                    `    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                }                        
+                
+            }         
+        }
+
+        //console.log("tagFinal: " + tagFinal);
+        flagPrimerCalendario = true;       
+
+        divProfesionalesRef.innerHTML = divProfesionalesRef.innerHTML + `
 
             <div class="card" style="margin-bottom: 1rem;">
                 <div class="card-body">
                     <h5 class="card-title"><span id="...">${childSnapshot.val().profesional.apellido}</span>, <span id="...">${childSnapshot.val().profesional.nombre}</span></h5>
                     <h6 class="card-title">Matrícula: <span id="...">${childSnapshot.val().profesional.especialidad}</span></h6>
                     <p class="card-text">Matrícula (MN/MP): <span id="...">${childSnapshot.val().profesional.matricula}</span></p>
-                    <button type="button" id="tomarTurno${childSnapshot.val().profesional.matricula}" class="reservar btn btn-warning" style="width: 100%;" data-bs-dismiss="modal">Resevar</button>
+                    <button type="button" id="tomarTurno${childSnapshot.val().profesional.matricula}" class="reservar btn btn-warning" style="width: 100%;" >Resevar</button> 
+                    ` +
+                    tagFinal +
+                    `
                 </div>
-            </div>
-
+            </div>  
         `;
-
-        // <button type="button" id="tomarTurno${childSnapshot.val().profesional.matricula}" class="reservar btn btn-warning" style="width: 100%;" >Resevar</button>
-
-        // idReservar = "tomarTurno" + childSnapshot.val().profesional.matricula; //.addEventListener('click', confirmarTurno);
-        // console.log("id: " + idReservar + " " + "tipo: " + typeof idReservar);
-        // reservarRef = document.getElementById(idReservar);
-        // console.log("ref: " + reservarRef);
-
-        // reservarRef.addEventListener('click', confirmarTurno);
-
+        // data-bs-dismiss="modal"
     });
         
-    // Repasar esta parte. emoroni.
-
-    //document.getElementById("tomarTurnoId").addEventListener('click', confirmarTurno);
-
+    horariosRef = document.getElementsByClassName("horario form-check-input me-1");
     reservarRef = document.getElementsByClassName("reservar btn btn-warning");
 
     for(let reserva of reservarRef) {
@@ -109,91 +267,65 @@ onValue(mostViewedPosts, (snapshot) => {
     }
 
     }, {
+    // https://github.com/kiprotect/klaro/issues/283
     onlyOnce: true
 });
 
-// Referencias al DOM
-
-let nombrePacienteRef = document.getElementById("nombreId");
-console.log(nombrePacienteRef);
-let apellidoPacienteRef = document.getElementById("apellidoId");
-//console.log(apellidoPacienteRef);
-let domicilioPacienteRef = document.getElementById("domicilioId");
-//console.log(domicilioPacienteRef);
-let documentoPacienteRef = document.getElementById("documentoId");
-//console.log(documentoPacienteRef);
-let obraSocialPacienteRef = document.getElementById("obraSocialId");
-//console.log(obraSocialPacienteRef);
-
-let nombreRef = document.getElementById("nombrePaciente");
-//console.log(nombreRef);
-let apellidoRef = document.getElementById("apellidoPaciente");
-//console.log(apellidoRef);
-let documentoRef = document.getElementById("numeroDocumento");
-//console.log(documentoRef);
-let domicioRef = document.getElementById("domicilioPaciente");
-//console.log(domicioRef);
-let obraSocialRef = document.getElementById("obraSocial");
-//console.log(obraSocialRef);
-
-let botonUpdateRef = document.getElementById("botonUpdate");
-botonUpdateRef.addEventListener("click", updatePaciente, false);
-
-let botonModalUpdateRef = document.getElementById("buttonModalUpdatePaciente");
-
-let numeroPaciente = 0;
-
-// Arrays a emplear
-
-const pacientesDB = [];
-const turnosDB = [];
-
-// Clases desarrolladas. Clase Turno y Paciente
-
-class Turno{
-    constructor (id, especialista, paciente, fecha, horario, estado)
-    {
-        this.id = id;
-        this.especialista = especialista;
-        this.paciente = paciente;
-        this.fecha = fecha;
-        this.horario = horario;
-        this.estado = estado;
+function diaDisponible (dias){
+    let flagDay = new Array (5);
+    flagDay[0] = new Array (17);    
+    flagDay[1] = new Array (17);    
+    flagDay[2] = new Array (17);    
+    flagDay[3] = new Array (17);    
+    flagDay[4] = new Array (17);
+    
+    for(let i = 0; i < 5; i++){
+        flagDay[i][0] = 0;
+        for(let j = 1; j < 17; j++){
+            flagDay[i][j] = 0;
+            if (dias[i][j] == 'D'){
+                flagDay[i][0] = 1;
+                flagDay[i][j] = 1;
+            }
+        }
     }
+
+    return flagDay;
 }
 
-class Paciente{
-    constructor (legajo, nombre, apellido, dni, domicilio, obraSocial)
-    {
-        this.legajo = legajo;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.documento = dni;
-        this.domicilio = domicilio;
-        this.obraSocial = obraSocial;
+function analisisHorario (flagDay){
+    for(let i = 0; i < 5; i++){
+        if(flagDay[i][0] == 1){
+            for(let j = 1; j < 17; j++){
+                if(flagDay[i][j] == 1){
+                    let minPlus = j * 30;
+
+                    let hora = parseInt(8 + (minPlus / 60));
+                    let min  = minPlus % 60;
+                    
+                    if(hora < 10){
+                        hora = hora.toString().padStart(2, "0")
+                    }
+                    else{
+                        hora = hora.toString();
+                    }
+
+                    if(min == 0){
+                        min = min.toString().padEnd(2, "0")
+                    }
+                    else{
+                        min = min.toString();
+                    }
+
+                    flagDay[i][j] = hora + ":" + min; 
+                }
+            }
+        }    
     }
 
-    actualizarDatos (nombre, apellido, dni, domicilio, obraSocial){
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.documento = dni;
-        this.domicilio = domicilio;
-        this.obraSocial = obraSocial;
-    }
-
-    tomarTurno (id, especialista, paciente, fecha, horario, estado){
-        turnosDB.push(new Turno(id, especialista, paciente, fecha, horario, estado));
-    }
-
-    modificarTurno (id, fecha, horario){
-        turnosDB.forEach(turno => {if(turno.id == id){turno.fecha = fecha; turno.horario = horario;}});
-    }
+    return flagDay;
 }
 
-// Agrego de manera inicial estos elementos a los arrays porque cuando el proyecto este más avanzado, el paciente al momento de ver el desarrollo compartido, será porque efectivamente ya habrá creado su cuenta y también, habrá tomado un turno.
-
-pacientesDB.push(new Paciente(numeroPaciente, "Nombre", "Apellido", 23456789, "Calle Ejemplar 1", "Obra Social"));
-turnosDB.push(new Turno(1234, "Médico clinico", 0, "12/06/2022", "12:00", "Tomado"));
 
 numeroPaciente++;
 
@@ -271,12 +403,43 @@ function actualizarDatosActuales (){
 }
 
 function confirmarTurno (){
-    Swal.fire({
-            title: '¡Bien!',
-            text: 'Turno confirmado con el profesional.',
+    let contador = 0;
+
+    console.log(this.id);
+
+    for(let horario of horariosRef){
+        if(horario.checked){
+            contador ++;
+        }
+    }
+
+    if(contador == 0){
+        Swal.fire({
+            title: '¿Olvidó algo?',
+            text: 'Seleccione una fecha y horario.',
+            icon: 'question',
+            confirmButtonText: 'Continuar'
+        });
+    }
+
+    else if(contador == 1){
+        Swal.fire({
+            title: 'Turno reservado',
+            text: 'Su turno fue reservado con el profesional seleccionado.',
             icon: 'success',
             confirmButtonText: 'Continuar'
         });
+    }
+
+    else if (contador > 1){
+        Swal.fire({
+            title: 'Demasiados turnos...',
+            text: 'Seleccione solo una fecha y horario.',
+            icon: 'warning',
+            confirmButtonText: 'Continuar'
+        });
+    }
+
 }
 
 function actualizarDatosProfesionales (){

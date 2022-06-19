@@ -15,6 +15,37 @@
         <link rel="shortcut icon" href="../media/icons/stethoscope.png">
     </head>
     <body>
+        <nav class="header__boots header__boots--alta-usuario navbar navbar-expand-md navbar-light py-3">
+            <hr>
+            <div class="container-fluid">
+            <!--
+                Para alcanzar lo que quiero aquí, necesito emplear JS. 
+                <a class="navbar-brand" href="#">
+                <img src="../media/icons/stethoscope.png" alt="" width="30" height="24">
+                </a>
+            -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a href="../index.html">Home</a>
+                    <a href="./servicios.html">Servicios</a>
+                    <a href="./nosotros.html">Sobre Nosotros</a>
+                    <a href="./contacto.html">Contacto</a>
+                    <a href="./login.html">Gestión Personal</a>
+                </div>
+                </div>
+            </div>
+            <hr>
+        </nav>
+
+        <section class="main-section">
+            <div class="main-section__title main-section__title--servicios">
+                <h1>Gestión de secretaria</h1>
+            </div>
+        </section>
+
         <div class="container"> <!-- style="margin-top: 1rem;"> -->
             <div class="row justify-content-center">
                 <form class="col-lg-10 col-md-10 col-sm-10 col-12">
@@ -48,32 +79,229 @@
             </div>
 
             <div class="row justify-content-center">
-                <ul class="class=col-lg-10 col-md-10 col-sm-10 col-12" style="margin-top: 1rem;">
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" id="lunes" type="checkbox" value="" aria-label="...">
-                        Lunes
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" id="martes" type="checkbox" value="" aria-label="...">
-                        Martes
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" id="miercoles" type="checkbox" value="" aria-label="...">
-                        Miércoles
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" id="jueves" type="checkbox" value="" aria-label="...">
-                        Jueves
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" id="viernes" type="checkbox" value="" aria-label="...">
-                        Viernes
-                    </li>
-                </ul>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-12">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Lunes
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <input class="form-check-input me-1" id="lunes1" type="checkbox" value="" aria-label="...">
+                                08:30
+                                <input class="form-check-input me-1" id="lunes2" type="checkbox" value="" aria-label="...">
+                                09:00
+                                <input class="form-check-input me-1" id="lunes3" type="checkbox" value="" aria-label="...">
+                                09:30
+                                <input class="form-check-input me-1" id="lunes4" type="checkbox" value="" aria-label="...">
+                                10:00
+                                <input class="form-check-input me-1" id="lunes5" type="checkbox" value="" aria-label="...">
+                                10:30
+                                <input class="form-check-input me-1" id="lunes6" type="checkbox" value="" aria-label="...">
+                                11:00
+                                <input class="form-check-input me-1" id="lunes7" type="checkbox" value="" aria-label="...">
+                                11:30
+                                <input class="form-check-input me-1" id="lunes8" type="checkbox" value="" aria-label="...">
+                                12:00
+                                <input class="form-check-input me-1" id="lunes9" type="checkbox" value="" aria-label="...">
+                                12:30
+                                <input class="form-check-input me-1" id="lunes10" type="checkbox" value="" aria-label="...">
+                                13:00
+                                <input class="form-check-input me-1" id="lunes11" type="checkbox" value="" aria-label="...">
+                                13:30
+                                <input class="form-check-input me-1" id="lunes12" type="checkbox" value="" aria-label="...">
+                                14:00
+                                <input class="form-check-input me-1" id="lunes13" type="checkbox" value="" aria-label="...">
+                                14:30
+                                <input class="form-check-input me-1" id="lunes14" type="checkbox" value="" aria-label="...">
+                                15:00
+                                <input class="form-check-input me-1" id="lunes15" type="checkbox" value="" aria-label="...">
+                                15:30
+                                <input class="form-check-input me-1" id="lunes16" type="checkbox" value="" aria-label="...">
+                                16:00
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                Martes
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <input class="form-check-input me-1" id="martes1" type="checkbox" value="" aria-label="...">
+                                08:30
+                                <input class="form-check-input me-1" id="martes2" type="checkbox" value="" aria-label="...">
+                                09:00
+                                <input class="form-check-input me-1" id="martes3" type="checkbox" value="" aria-label="...">
+                                09:30
+                                <input class="form-check-input me-1" id="martes4" type="checkbox" value="" aria-label="...">
+                                10:00
+                                <input class="form-check-input me-1" id="martes5" type="checkbox" value="" aria-label="...">
+                                10:30
+                                <input class="form-check-input me-1" id="martes6" type="checkbox" value="" aria-label="...">
+                                11:00
+                                <input class="form-check-input me-1" id="martes7" type="checkbox" value="" aria-label="...">
+                                11:30
+                                <input class="form-check-input me-1" id="martes8" type="checkbox" value="" aria-label="...">
+                                12:00
+                                <input class="form-check-input me-1" id="martes9" type="checkbox" value="" aria-label="...">
+                                12:30
+                                <input class="form-check-input me-1" id="martes10" type="checkbox" value="" aria-label="...">
+                                13:00
+                                <input class="form-check-input me-1" id="martes11" type="checkbox" value="" aria-label="...">
+                                13:30
+                                <input class="form-check-input me-1" id="martes12" type="checkbox" value="" aria-label="...">
+                                14:00
+                                <input class="form-check-input me-1" id="martes13" type="checkbox" value="" aria-label="...">
+                                14:30
+                                <input class="form-check-input me-1" id="martes14" type="checkbox" value="" aria-label="...">
+                                15:00
+                                <input class="form-check-input me-1" id="martes15" type="checkbox" value="" aria-label="...">
+                                15:30
+                                <input class="form-check-input me-1" id="martes16" type="checkbox" value="" aria-label="...">
+                                16:00
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                Miércoles
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <input class="form-check-input me-1" id="miercoles1" type="checkbox" value="" aria-label="...">
+                                08:30
+                                <input class="form-check-input me-1" id="miercoles2" type="checkbox" value="" aria-label="...">
+                                09:00
+                                <input class="form-check-input me-1" id="miercoles3" type="checkbox" value="" aria-label="...">
+                                09:30
+                                <input class="form-check-input me-1" id="miercoles4" type="checkbox" value="" aria-label="...">
+                                10:00
+                                <input class="form-check-input me-1" id="miercoles5" type="checkbox" value="" aria-label="...">
+                                10:30
+                                <input class="form-check-input me-1" id="miercoles6" type="checkbox" value="" aria-label="...">
+                                11:00
+                                <input class="form-check-input me-1" id="miercoles7" type="checkbox" value="" aria-label="...">
+                                11:30
+                                <input class="form-check-input me-1" id="miercoles8" type="checkbox" value="" aria-label="...">
+                                12:00
+                                <input class="form-check-input me-1" id="miercoles9" type="checkbox" value="" aria-label="...">
+                                12:30
+                                <input class="form-check-input me-1" id="miercoles10" type="checkbox" value="" aria-label="...">
+                                13:00
+                                <input class="form-check-input me-1" id="miercoles11" type="checkbox" value="" aria-label="...">
+                                13:30
+                                <input class="form-check-input me-1" id="miercoles12" type="checkbox" value="" aria-label="...">
+                                14:00
+                                <input class="form-check-input me-1" id="miercoles13" type="checkbox" value="" aria-label="...">
+                                14:30
+                                <input class="form-check-input me-1" id="miercoles14" type="checkbox" value="" aria-label="...">
+                                15:00
+                                <input class="form-check-input me-1" id="miercoles15" type="checkbox" value="" aria-label="...">
+                                15:30
+                                <input class="form-check-input me-1" id="miercoles16" type="checkbox" value="" aria-label="...">
+                                16:00
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                Jueves
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <input class="form-check-input me-1" id="jueves1" type="checkbox" value="" aria-label="...">
+                                08:30
+                                <input class="form-check-input me-1" id="jueves2" type="checkbox" value="" aria-label="...">
+                                09:00
+                                <input class="form-check-input me-1" id="jueves3" type="checkbox" value="" aria-label="...">
+                                09:30
+                                <input class="form-check-input me-1" id="jueves4" type="checkbox" value="" aria-label="...">
+                                10:00
+                                <input class="form-check-input me-1" id="jueves5" type="checkbox" value="" aria-label="...">
+                                10:30
+                                <input class="form-check-input me-1" id="jueves6" type="checkbox" value="" aria-label="...">
+                                11:00
+                                <input class="form-check-input me-1" id="jueves7" type="checkbox" value="" aria-label="...">
+                                11:30
+                                <input class="form-check-input me-1" id="jueves8" type="checkbox" value="" aria-label="...">
+                                12:00
+                                <input class="form-check-input me-1" id="jueves9" type="checkbox" value="" aria-label="...">
+                                12:30
+                                <input class="form-check-input me-1" id="jueves10" type="checkbox" value="" aria-label="...">
+                                13:00
+                                <input class="form-check-input me-1" id="jueves11" type="checkbox" value="" aria-label="...">
+                                13:30
+                                <input class="form-check-input me-1" id="jueves12" type="checkbox" value="" aria-label="...">
+                                14:00
+                                <input class="form-check-input me-1" id="jueves13" type="checkbox" value="" aria-label="...">
+                                14:30
+                                <input class="form-check-input me-1" id="jueves14" type="checkbox" value="" aria-label="...">
+                                15:00
+                                <input class="form-check-input me-1" id="jueves15" type="checkbox" value="" aria-label="...">
+                                15:30
+                                <input class="form-check-input me-1" id="jueves16" type="checkbox" value="" aria-label="...">
+                                16:00
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                Viernes
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <input class="form-check-input me-1" id="viernes1" type="checkbox" value="" aria-label="...">
+                                08:30
+                                <input class="form-check-input me-1" id="viernes2" type="checkbox" value="" aria-label="...">
+                                09:00
+                                <input class="form-check-input me-1" id="viernes3" type="checkbox" value="" aria-label="...">
+                                09:30
+                                <input class="form-check-input me-1" id="viernes4" type="checkbox" value="" aria-label="...">
+                                10:00
+                                <input class="form-check-input me-1" id="viernes5" type="checkbox" value="" aria-label="...">
+                                10:30
+                                <input class="form-check-input me-1" id="viernes6" type="checkbox" value="" aria-label="...">
+                                11:00
+                                <input class="form-check-input me-1" id="viernes7" type="checkbox" value="" aria-label="...">
+                                11:30
+                                <input class="form-check-input me-1" id="viernes8" type="checkbox" value="" aria-label="...">
+                                12:00
+                                <input class="form-check-input me-1" id="viernes9" type="checkbox" value="" aria-label="...">
+                                12:30
+                                <input class="form-check-input me-1" id="viernes10" type="checkbox" value="" aria-label="...">
+                                13:00
+                                <input class="form-check-input me-1" id="viernes11" type="checkbox" value="" aria-label="...">
+                                13:30
+                                <input class="form-check-input me-1" id="viernes12" type="checkbox" value="" aria-label="...">
+                                14:00
+                                <input class="form-check-input me-1" id="viernes13" type="checkbox" value="" aria-label="...">
+                                14:30
+                                <input class="form-check-input me-1" id="viernes14" type="checkbox" value="" aria-label="...">
+                                15:00
+                                <input class="form-check-input me-1" id="viernes15" type="checkbox" value="" aria-label="...">
+                                15:30
+                                <input class="form-check-input me-1" id="viernes16" type="checkbox" value="" aria-label="...">
+                                16:00
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="row justify-content-center">
-                 <button type="button" class="btn btn-success col-lg-10 col-md-10 col-sm-10 col-12" id="botonUpdate" style="margin: 1rem;">Actualizar datos</button>
+            <!-- 1. Profundizar sobre el estilo desarrollado.
+                 2. Derrollar el estilo desde CSS. emoroni. -->
+            <div class="row justify-content-center" style="margin-top: 1rem;">
+                 <button type="button" class="btn btn-success col-lg-10 col-md-10 col-sm-10 col-12" id="botonUpdate" style="margin-top: 1rem; margin-bottom: 1rem;">Actualizar datos</button>
             </div>
 
         <script src="https://cdn.jsdelivr.net/npm/luxon@2.4.0/build/global/luxon.min.js"></script>
