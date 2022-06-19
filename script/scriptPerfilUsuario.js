@@ -1,9 +1,8 @@
 console.log("Consola de pruebas - Sistema de gestión de consultorios privados");
 
-// ¿Qué es el atributo type="module" cuando agrago el script?
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import { getDatabase, ref, set, child, get, query, orderByChild, onValue } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+import { getDatabase, ref, set, push, child, get, query, orderByChild, onValue, equalTo } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
 // ¿Cómo obtener esta información? https://firebase.google.com/docs/web/learn-more?authuser=0&hl=es#config-object
 
@@ -22,48 +21,53 @@ const app = initializeApp(firebaseConfig);
 
 // API Docs: https://firebase.google.com/docs/reference/js/auth?hl=es&authuser=0#getauth
 const auth = getAuth();
-let userId;
 
 // Get a reference to the database service; https://firebase.google.com/docs/database/web/start#initialize_the_javascript_sdk
 const database = getDatabase(app);
-console.log(database);
+//console.log(database);
 
 // Referencias al DOM
 
+// Referencias a los campos de la tarjeta
 let nombrePacienteRef = document.getElementById("nombreId");
 let apellidoPacienteRef = document.getElementById("apellidoId");
 let domicilioPacienteRef = document.getElementById("domicilioId");
 let documentoPacienteRef = document.getElementById("documentoId");
 let obraSocialPacienteRef = document.getElementById("obraSocialId");
+
+// Referencias a los campos del modal para la edición de la información del paciente
 let nombreRef = document.getElementById("nombrePaciente");
 let apellidoRef = document.getElementById("apellidoPaciente");
 let documentoRef = document.getElementById("numeroDocumento");
 let domicioRef = document.getElementById("domicilioPaciente");
 let obraSocialRef = document.getElementById("obraSocial");
 
+// Referencia a la división que será completada con la información del turno tomado
+let divTurnoRef = document.getElementById("listadoTurnos");
+
+// Referencia a la división que será completada con la información de los profesionales de la base de datos
+let divProfesionalesRef = document.getElementById("listadoProfesionales");
+
 let botonUpdateRef = document.getElementById("botonUpdate");
-botonUpdateRef.addEventListener("click", updatePaciente, false);
+botonUpdateRef.addEventListener("click", updatePaciente);
 
-let botonModalUpdateRef = document.getElementById("buttonModalUpdatePaciente");
+// Variables globales
 
-let numeroPaciente = 0;
-
-// Arrays a emplear
-
-const pacientesDB = [];
-const turnosDB = [];
+let userId; // ID de cada usuario generado con Firebase Authentication
+let reservarRef, horariosRef; // Referencias a los botones para tomar la reserva del turno y seleccionar los horarios disponibles.
 
 // Clases desarrolladas. Clase Turno y Paciente
 
 class Turno{
 
-    constructor(id, semanaAno, dia, horario, profesional, paciente){
-        this.id = id;
-        this.semanaAno = semanaAno;
-        this.horario = horario;
-        this.dia = dia;
-        this.profesional = profesional;
+    constructor(paciente, profesionalMatricula, profesionalNombre, profesionalApellido, dia, hora, minuto){
         this.paciente = paciente;
+        this.profesionalMatricula = profesionalMatricula;
+        this.profesionalNombre = profesionalNombre;
+        this.profesionalApellido = profesionalApellido;
+        this.hora = hora;
+        this.dia = dia;
+        this.minuto = minuto;
     }
 
 }
@@ -87,66 +91,86 @@ class Paciente{
         this.obraSocial = obraSocial;
     }
 
-    tomarTurno (id, especialista, paciente, fecha, horario, estado){
-        turnosDB.push(new Turno(id, especialista, paciente, fecha, horario, estado));
-    }
+    // tomarTurno (id, especialista, paciente, fecha, horario, estado){
+    //     turnosDB.push(new Turno(id, especialista, paciente, fecha, horario, estado));
+    // }
 
-    modificarTurno (id, fecha, horario){
-        turnosDB.forEach(turno => {if(turno.id == id){turno.fecha = fecha; turno.horario = horario;}});
-    }
+    // modificarTurno (id, fecha, horario){
+    //     turnosDB.forEach(turno => {if(turno.id == id){turno.fecha = fecha; turno.horario = horario;}});
+    // }
 }
-
-// Agrego de manera inicial estos elementos a los arrays porque cuando el proyecto este más avanzado, el paciente al momento de ver el desarrollo compartido, será porque efectivamente ya habrá creado su cuenta y también, habrá tomado un turno.
-
-pacientesDB.push(new Paciente(numeroPaciente, "Nombre", "Apellido", 23456789, "Calle Ejemplar 1", "Obra Social"));
-turnosDB.push(new Turno(1234, "Médico clinico", 0, "12/06/2022", "12:00", "Tomado"));
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    userId = user.uid;
-    console.log("User ID: " + userId);
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        userId = user.uid;
+        //console.log("User ID: " + userId);
 
-    // https://firebase.google.com/docs/database/web/read-and-write#read_data_once
+        // https://firebase.google.com/docs/database/web/read-and-write#read_data_once
 
-    get(child(ref(database), 'users/' + userId))
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                console.log(snapshot.val());
-                localStorage.setItem("pacienteEnLinea", JSON.stringify(snapshot.val().paciente));
-                actualizarDatosActuales();
-                //actualizarDatosProfesionales();
-                console.log("User Logged in");
-            } else {
-                console.log("No data available");
-            }
-            })
-        .catch((error) => {
-            console.error(error);
-        });
+        get(child(ref(database), 'users/' + userId))
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    //console.log("Snapshot.val(): " + snapshot.val());
+                    localStorage.setItem("pacienteEnLinea", JSON.stringify(snapshot.val().paciente));
+                    actualizarDatosActuales();
+                    //actualizarDatosProfesionales();
+
+                    // Esta query la hago para filtrar la información de los turnos según cada uno corresponda al paciente logueado. Esto quiere decir que no se mostrarán a cada usuario los turnos que sean de otros pacientes.
+                    // Link de interés: https://www.youtube.com/watch?v=C4ZnTCi50bc
+                    const turnosQuery = query(ref(database, 'turnos'), orderByChild('turno/paciente'), equalTo(userId));
+
+                    onValue(turnosQuery, (snapshot) => {
+                        snapshot.forEach((childSnapshot) => {
+                            const childKey = childSnapshot.key;
+                            const childData = childSnapshot.val();
+                            // console.log("Child key: " + childKey);
+                            // console.log("Child data: " + childData);
+
+                            divTurnoRef.innerHTML += `
+                                <div class="card" style="margin-bottom: 1rem">
+                                    <div class="card-header">
+                                        Turno confirmado
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">${childSnapshot.val().turno.profesionalApellido}, ${childSnapshot.val().turno.profesionalNombre}</h5>
+                                        <h6>MN/MP: ${childSnapshot.val().turno.profesionalMatricula}</h6>
+                                        <p class="card-text">Usted tiene un turno con el profesional el día ${childSnapshot.val().turno.dia} a las ${childSnapshot.val().turno.hora}:${childSnapshot.val().turno.minuto}. En caso de no poder asistir, tenga a bien cancelar el turno.</p>
+                                        <a href="#" class="btn btn-danger">Cancelar</a>
+                                    </div>
+                                </div>
+                            `;                            
+                        });
+                    });
+
+                    console.log("Usuario Logueado");
+                } else {
+                    console.log("No hay información sobre este usuario. Debe actualizarse.");
+                }
+                })
+            .catch((error) => {
+                console.error(error);
+            });
     } else {
     // User is signed out
     console.log("No hay usuario conectado.");
-    //actualizarDatosProfesionales();
+    // actualizarDatosProfesionales();
     }
 });
 
-const mostViewedPosts = query(ref(database, 'profesionales'), orderByChild('profesional/especialidad'));
-
-// console.log("Que obtengo de la query: ");
+// Esta query a la base de datos la hago para poder ordenar el listado de los profesionales que trabajan en el consultorio según la especialidad de cada uno. Esto puede ser escalable a un filtrado por el valor antes mencionado.
+const profesionalesQuery = query(ref(database, 'profesionales'), orderByChild('profesional/especialidad'));
 // console.log(mostViewedPosts.toString());
 
-let divProfesionalesRef = document.getElementById("listadoProfesionales");
-let reservarRef, horariosRef;
-
-onValue(mostViewedPosts, (snapshot) => {
+onValue(profesionalesQuery, (snapshot) => {
     snapshot.forEach((childSnapshot) => {
         const childKey = childSnapshot.key;
         const childData = childSnapshot.val();
-        console.log(childKey);
-        console.log(childData);
+        //console.log("Child key: " + childKey);
+        //console.log("Child data: " + childData);
 
+        // diaInfo contiene la matriz descripta en el funcionamiento de analisisHorario.
         let diaInfo = analisisHorario(diaDisponible(childSnapshot.val().profesional.dia));
         let tagFinal, tagAux, flagPrimerDato = true, flagPrimerCalendario = true;
 
@@ -163,9 +187,10 @@ onValue(mostViewedPosts, (snapshot) => {
                 for(let j = 1; j < 17; j++){
                     if(diaInfo[i][j] != 0)
                     {
+                        //Separo el día del horario con : porque me es mucho más útilo luego para hacer la toma del turno una vez que el paciente seleccionó una opción.
                         if(flagPrimerDato){
                             tagAux = `
-                                <input class="horario form-check-input me-1" id="${diaInfo[i][0] + "-" + diaInfo[i][j]}" type="checkbox" value="" aria-label="...">
+                                <input class="horario form-check-input me-1" id="${diaInfo[i][0] + ":" + diaInfo[i][j]}" type="checkbox" value="" aria-label="...">
                                 <span>
                                     ${diaInfo[i][j]}
                                 </span>                                        
@@ -174,7 +199,7 @@ onValue(mostViewedPosts, (snapshot) => {
                         }
                         else{
                             tagAux += `
-                                <input class="horario form-check-input me-1" id="${diaInfo[i][0] + "-" + diaInfo[i][j]}" type="checkbox" value="" aria-label="...">
+                                <input class="horario form-check-input me-1" id="${diaInfo[i][0] + ":" + diaInfo[i][j]}" type="checkbox" value="" aria-label="...">
                                 <span>
                                     ${diaInfo[i][j]}
                                 </span>                                        
@@ -268,8 +293,12 @@ onValue(mostViewedPosts, (snapshot) => {
 
     }, {
     // https://github.com/kiprotect/klaro/issues/283
-    onlyOnce: true
+    // onlyOnce: true // Si lo descomento realizará esta lectura solo una vez.
 });
+
+// Funciones para el manejo de la información de los horarios disponibles para los profesionales.
+
+// diaDisponible espera como parámetro la matriz de los días disponibles en los que un profesional trabaja en los consultorios. A partir de esto analiza en que se encuentra un turno disponible y genera una nueva matriz. El primero de los elementos en cada uno de los arrays contenidos en la matriz indicará, en caso de ser '1', que en ese día hay horarios disponibles. Pero en caso de ser '0', indicará que ese día en la semana el profesional no trabaja en los consultorios.
 
 function diaDisponible (dias){
     let flagDay = new Array (5);
@@ -292,6 +321,8 @@ function diaDisponible (dias){
 
     return flagDay;
 }
+
+// La función analisisHorario espera una matriz como parámetro una matriz como la que es retornada por diaDisponible. Lo que hace esta función con esta matriz es manipularla de manera en que en los días en los que hay turnos disponibles se almacene el nombre del día más el horario disponible para turnos. Esta información será utilizada para generar el listado de turnos posibles a los que el paciente puede aplicar.
 
 function analisisHorario (flagDay){
     for(let i = 0; i < 5; i++){
@@ -326,9 +357,6 @@ function analisisHorario (flagDay){
     return flagDay;
 }
 
-
-numeroPaciente++;
-
 // https://firebase.google.com/docs/database/web/read-and-write#basic_write
 
 // Función para actualizar los datos del paciente. Es importante recordar que cuando llegue a este punto ya tendrá una cuenta creada con su correo y contraseña.
@@ -336,7 +364,7 @@ numeroPaciente++;
 function updatePaciente(){
     // Información antes del update.
     console.log("Información antes del update");
-    console.log(pacientesDB[0]);
+    //console.log(pacientesDB[0]); No descomentar esta línea. emoroni.
 
     let flagNombre, flagApellido, flagDocumento, flagDomicilio, flagObraSocial;
 
@@ -353,17 +381,17 @@ function updatePaciente(){
     if((obraSocial != "")&&(isNaN(obraSocial))){flagObraSocial = 1;}
 
     if(flagNombre && flagApellido && flagDocumento && flagDomicilio && flagObraSocial){
-        // Actualización de los datos del paciente.
-        pacientesDB[0].actualizarDatos(nombre, apellido, documento, domicilio, obraSocial);
+        // Actualización de los datos del paciente. Relación entre el ID del usuario creado con la información respectiva a cada paciente.
+        let paciente = new Paciente (userId, nombre, apellido, documento, domicilio, obraSocial);
         //const db = getDatabase();
         set(ref(database, 'users/' + userId), {
-            paciente: pacientesDB[0]
+            paciente: paciente//pacientesDB[0]
         });
 
         console.log("Información luego del update");
-        console.log(pacientesDB[0]);
+        //console.log(pacientesDB[0]);
 
-        localStorage.setItem("pacienteEnLinea", JSON.stringify(pacientesDB[0]));
+        localStorage.setItem("pacienteEnLinea", JSON.stringify(paciente));//pacientesDB[0]));
         actualizarDatosActuales();
 
         nombreRef.value = "";
@@ -402,14 +430,21 @@ function actualizarDatosActuales (){
     obraSocialPacienteRef.innerHTML = pacienteActual.obraSocial;
 }
 
+// confirmarTurno es una función que evaluará que solamente uno de los inputs se encuentre seleccionado de manera que el paciente solo puede tomar un turno por vez cuando ingrese a la sección de tomar turnos.
+
 function confirmarTurno (){
     let contador = 0;
+    
+    let profesionalId = this.id;
+    profesionalId = profesionalId.slice(10);
+    //console.log(profesionalId);
 
-    console.log(this.id);
+    let horarioId;
 
     for(let horario of horariosRef){
         if(horario.checked){
-            contador ++;
+            contador ++;            
+            horarioId = horario.id;
         }
     }
 
@@ -423,6 +458,38 @@ function confirmarTurno (){
     }
 
     else if(contador == 1){
+        let turno, diaHorario, nombreProf, apellidoProf, dia, hora, minuto;
+        diaHorario = horarioId.split(":");
+        dia = diaHorario[0];
+        hora = diaHorario [1];
+        minuto = diaHorario [2];
+        //console.log("Horario Id: " + horarioId + " DiaHorario: " + diaHorario);
+        //console.log("Dia: " + dia);
+        //console.log("Hora: " + hora);
+        //console.log("Min: " + minuto);
+
+        const matriculaQuery = query(ref(database, 'profesionales'), orderByChild('profesional/matricula'), equalTo(profesionalId));
+        //console.log(matriculaQuery);
+
+        onValue(matriculaQuery, (snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+                const childKey = childSnapshot.key;
+                const childData = childSnapshot.val();
+                // console.log("Child key: " + childKey);
+                // console.log("Child data: " + childData);
+
+                nombreProf = childSnapshot.val().profesional.nombre;
+                apellidoProf = childSnapshot.val().profesional.apellido;
+            });
+        }, {
+            onlyOnce: true
+        });
+                         
+        turno = new Turno(userId, profesionalId, nombreProf, apellidoProf, dia, hora, minuto);
+        push(ref(database, 'turnos/'), {
+            turno: turno
+        });
+
         Swal.fire({
             title: 'Turno reservado',
             text: 'Su turno fue reservado con el profesional seleccionado.',
@@ -440,25 +507,4 @@ function confirmarTurno (){
         });
     }
 
-}
-
-function actualizarDatosProfesionales (){
-    get(child(ref(database), 'profesionales/'))
-        .then((snapshot) => {
-        if (snapshot.exists()) {
-            // var dato = snapshot.val();
-            // const array = new Array;
-            // console.log("Que hay en la base de datos: ");
-
-            // Object.keys(dato).forEach((key) => {
-            //     array.push({[key]: [key]});
-            // });
-
-            // console.log(array[1]);
-        } else {
-            console.log("No data available");
-        }
-        }).catch((error) => {
-        console.error(error);
-    });
 }

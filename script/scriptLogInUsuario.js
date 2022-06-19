@@ -42,8 +42,7 @@ function logInUser (){
             .then((userCredential) => {
                 // Signed in
                 console.log(userCredential.user);
-                window.open("./perfil_usuario.html");
-                window.close("./login.html");
+                window.location.href = "./perfil_usuario.html";
             })
             .catch((error) => {
                 const errorCode = error.code;

@@ -45,8 +45,7 @@ function altaUser (){
                 // Signed in
                 const user = userCredential.user;
                 console.log(user);
-                window.open("./perfil_usuario.html");
-                window.close("./alta_usuario.html");
+                window.location.href = "./perfil_usuario.html";
             })
             .catch((error) => {
                 const errorCode = error.code;
