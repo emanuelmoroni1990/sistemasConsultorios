@@ -2,7 +2,7 @@ console.log("Consola de pruebas - Sistema de gestión de consultorios privados")
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import { getDatabase, ref, set, push, child, get, query, orderByChild, onValue, equalTo } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+import { getDatabase, ref, set, push, child, get, query, orderByChild, onValue, equalTo, remove } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
 // ¿Cómo obtener esta información? https://firebase.google.com/docs/web/learn-more?authuser=0&hl=es#config-object
 
@@ -54,7 +54,7 @@ botonUpdateRef.addEventListener("click", updatePaciente);
 // Variables globales
 
 let userId; // ID de cada usuario generado con Firebase Authentication
-let reservarRef, horariosRef; // Referencias a los botones para tomar la reserva del turno y seleccionar los horarios disponibles.
+let cancelarRef, reservarRef, horariosRef; // Referencias a los botones para cancelar, tomar la reserva del turno y seleccionar los horarios disponibles.
 
 // Clases desarrolladas. Clase Turno y Paciente
 
@@ -122,11 +122,12 @@ onAuthStateChanged(auth, (user) => {
                     const turnosQuery = query(ref(database, 'turnos'), orderByChild('turno/paciente'), equalTo(userId));
 
                     onValue(turnosQuery, (snapshot) => {
+                        divTurnoRef.innerHTML = ``;
                         snapshot.forEach((childSnapshot) => {
                             const childKey = childSnapshot.key;
                             const childData = childSnapshot.val();
-                            // console.log("Child key: " + childKey);
-                            // console.log("Child data: " + childData);
+                            console.log("Child key: " + childKey);
+                            console.log("Child data: " + childData);
 
                             divTurnoRef.innerHTML += `
                                 <div class="card" style="margin-bottom: 1rem">
@@ -137,11 +138,17 @@ onAuthStateChanged(auth, (user) => {
                                         <h5 class="card-title">${childSnapshot.val().turno.profesionalApellido}, ${childSnapshot.val().turno.profesionalNombre}</h5>
                                         <h6>MN/MP: ${childSnapshot.val().turno.profesionalMatricula}</h6>
                                         <p class="card-text">Usted tiene un turno con el profesional el día ${childSnapshot.val().turno.dia} a las ${childSnapshot.val().turno.hora}:${childSnapshot.val().turno.minuto}. En caso de no poder asistir, tenga a bien cancelar el turno.</p>
-                                        <a href="#" class="btn btn-danger">Cancelar</a>
+                                        <button id="cancelar${childSnapshot.key}"class="cancelar btn btn-danger">Cancelar</button>
                                     </div>
                                 </div>
                             `;                            
                         });
+
+                        cancelarRef = document.getElementsByClassName("cancelar btn btn-danger");
+
+                        for(let cancela of cancelarRef) {
+                            cancela.addEventListener('click', cancelarTurno);
+                        }
                     });
 
                     console.log("Usuario Logueado");
@@ -437,7 +444,7 @@ function confirmarTurno (){
     
     let profesionalId = this.id;
     profesionalId = profesionalId.slice(10);
-    //console.log(profesionalId);
+    console.log(profesionalId);
 
     let horarioId;
 
@@ -507,4 +514,29 @@ function confirmarTurno (){
         });
     }
 
+}
+
+// cancelarTurno es una función que elimina de la base de datos el turno tomado por el paciente.
+
+function cancelarTurno (){
+    let cancelarId = this.id; 
+    cancelarId = cancelarId.slice(8);
+
+    //const deleteQuery = query(ref(database, 'turnos'), equalTo(cancelarId));
+
+    remove(ref(database, 'turnos/' + cancelarId))
+        .then(() => {
+            Swal.fire({
+                title: 'Turno cancelado',
+                text: 'Su turno fue cancelado de manera exitosa.',
+                icon: 'info',
+                confirmButtonText: 'Continuar'
+            });
+            //console.log("Turno eliminado correctamente");
+            }
+        )
+        .catch((error) => {
+            console.log(error);
+        }
+        )
 }
