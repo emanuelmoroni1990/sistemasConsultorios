@@ -1,11 +1,9 @@
 console.log("Consola de pruebas - Sistema de gestión de consultorios privados");
 
-// ¿Qué es el atributo type="module" cuando agrago el script?
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 
 // ¿Cómo obtener esta información? https://firebase.google.com/docs/web/learn-more?authuser=0&hl=es#config-object
-
 const firebaseConfig = {
   apiKey: "AIzaSyAjugINdVkKqoyXgrJPzIUqtCtonmXeCCg",
   authDomain: "sistemasconsultoriosmedicos.firebaseapp.com",
@@ -18,6 +16,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+// Referencias al DOM
 let correoRef = document.getElementById("correoId");
 let passwordRef = document.getElementById("passwordId");
 let botonRef = document.getElementById("logInButttonId");
@@ -26,6 +25,14 @@ botonRef.addEventListener("click", logInUser);
 
 // API Docs: https://firebase.google.com/docs/reference/js/auth?hl=es&authuser=0#getauth
 const auth = getAuth(); 
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        window.location.href = "./perfil_usuario.html";
+    } else {
+    console.log("No hay usuario conectado.");
+    }
+});
 
 // API Docs: https://firebase.google.com/docs/auth/web/password-auth?hl=es#sign_in_a_user_with_an_email_address_and_password
 function logInUser (){

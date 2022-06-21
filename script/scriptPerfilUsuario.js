@@ -1,7 +1,7 @@
 console.log("Consola de pruebas - Sistema de gestión de consultorios privados");
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 import { getDatabase, ref, set, push, child, get, query, orderByChild, onValue, equalTo, remove } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
 // ¿Cómo obtener esta información? https://firebase.google.com/docs/web/learn-more?authuser=0&hl=es#config-object
@@ -27,6 +27,10 @@ const database = getDatabase(app);
 //console.log(database);
 
 // Referencias al DOM
+
+// Referecia al anchor de LogOut
+let logOutRef = document.getElementById("buttonLogOutUser");
+logOutRef.addEventListener("click", logOutPaciente);
 
 // Referencias a los campos de la tarjeta
 let nombrePacienteRef = document.getElementById("nombreId");
@@ -55,6 +59,7 @@ botonUpdateRef.addEventListener("click", updatePaciente);
 
 let userId; // ID de cada usuario generado con Firebase Authentication
 let cancelarRef, reservarRef, horariosRef; // Referencias a los botones para cancelar, tomar la reserva del turno y seleccionar los horarios disponibles.
+let acordionRef, botonAcordionRef; // Referencia a los elementos del acordion para cerrarlos una vez hecha la selección del turno.
 
 // Clases desarrolladas. Clase Turno y Paciente
 
@@ -112,6 +117,9 @@ onAuthStateChanged(auth, (user) => {
         get(child(ref(database), 'users/' + userId))
             .then((snapshot) => {
                 if (snapshot.exists()) {
+                    var boton = document.getElementById("buttonModalTomarTurno");
+                    boton.removeAttribute("disabled");
+                    
                     //console.log("Snapshot.val(): " + snapshot.val());
                     localStorage.setItem("pacienteEnLinea", JSON.stringify(snapshot.val().paciente));
                     actualizarDatosActuales();
@@ -126,8 +134,8 @@ onAuthStateChanged(auth, (user) => {
                         snapshot.forEach((childSnapshot) => {
                             const childKey = childSnapshot.key;
                             const childData = childSnapshot.val();
-                            console.log("Child key: " + childKey);
-                            console.log("Child data: " + childData);
+                            // console.log("Child key: " + childKey);
+                            // console.log("Child data: " + childData);
 
                             divTurnoRef.innerHTML += `
                                 <div class="card" style="margin-bottom: 1rem">
@@ -153,6 +161,13 @@ onAuthStateChanged(auth, (user) => {
 
                     console.log("Usuario Logueado");
                 } else {
+                    Swal.fire({
+                        title: '¡Bienvenido!',
+                        text: 'Antes de poder tomar un turno deberá actualizar su información personal.',
+                        icon: 'info',
+                        confirmButtonText: 'Continuar'
+                    });
+
                     console.log("No hay información sobre este usuario. Debe actualizarse.");
                 }
                 })
@@ -194,10 +209,10 @@ onValue(profesionalesQuery, (snapshot) => {
                 for(let j = 1; j < 17; j++){
                     if(diaInfo[i][j] != 0)
                     {
-                        //Separo el día del horario con : porque me es mucho más útilo luego para hacer la toma del turno una vez que el paciente seleccionó una opción.
+                        //Separo con : porque me es mucho más útilo luego para hacer la toma del turno una vez que el paciente seleccionó una opción.
                         if(flagPrimerDato){
                             tagAux = `
-                                <input class="horario form-check-input me-1" id="${diaInfo[i][0] + ":" + diaInfo[i][j]}" type="checkbox" value="" aria-label="...">
+                                <input class="horario form-check-input me-1" id="${childSnapshot.val().profesional.matricula + ":" + diaInfo[i][0] + ":" + diaInfo[i][j]}" type="checkbox" value="" aria-label="...">
                                 <span>
                                     ${diaInfo[i][j]}
                                 </span>                                        
@@ -206,7 +221,7 @@ onValue(profesionalesQuery, (snapshot) => {
                         }
                         else{
                             tagAux += `
-                                <input class="horario form-check-input me-1" id="${diaInfo[i][0] + ":" + diaInfo[i][j]}" type="checkbox" value="" aria-label="...">
+                                <input class="horario form-check-input me-1" id="${childSnapshot.val().profesional.matricula + ":" + diaInfo[i][0] + ":" + diaInfo[i][j]}" type="checkbox" value="" aria-label="...">
                                 <span>
                                     ${diaInfo[i][j]}
                                 </span>                                        
@@ -291,6 +306,8 @@ onValue(profesionalesQuery, (snapshot) => {
         // data-bs-dismiss="modal"
     });
         
+    botonAcordionRef = document.getElementsByClassName("accordion-button collapsed");
+    acordionRef = document.getElementsByClassName("accordion-collapse collapse");
     horariosRef = document.getElementsByClassName("horario form-check-input me-1");
     reservarRef = document.getElementsByClassName("reservar btn btn-warning");
 
@@ -415,6 +432,8 @@ function updatePaciente(){
         });
         
         console.log("Información actualizada.");
+        // Refresco la página para que se muestren los datos actualizados del paciente.
+        location.reload();
     }
     else{        
         Swal.fire({
@@ -465,44 +484,79 @@ function confirmarTurno (){
     }
 
     else if(contador == 1){
-        let turno, diaHorario, nombreProf, apellidoProf, dia, hora, minuto;
+        let turno, diaHorario, matriculaProf, nombreProf, apellidoProf, dia, hora, minuto;
         diaHorario = horarioId.split(":");
-        dia = diaHorario[0];
-        hora = diaHorario [1];
-        minuto = diaHorario [2];
-        //console.log("Horario Id: " + horarioId + " DiaHorario: " + diaHorario);
-        //console.log("Dia: " + dia);
-        //console.log("Hora: " + hora);
-        //console.log("Min: " + minuto);
+        matriculaProf = diaHorario[0];
+        dia = diaHorario[1];
+        hora = diaHorario [2];
+        minuto = diaHorario [3];
+        console.log("Horario Id: " + horarioId + " DiaHorario: " + diaHorario);
+        console.log("Matricula: " + matriculaProf);
+        console.log("Dia: " + dia);
+        console.log("Hora: " + hora);
+        console.log("Min: " + minuto);
 
-        const matriculaQuery = query(ref(database, 'profesionales'), orderByChild('profesional/matricula'), equalTo(profesionalId));
-        //console.log(matriculaQuery);
+        if(matriculaProf == profesionalId){
+            const matriculaQuery = query(ref(database, 'profesionales'), orderByChild('profesional/matricula'), equalTo(profesionalId));
+            //console.log(matriculaQuery);
 
-        onValue(matriculaQuery, (snapshot) => {
-            snapshot.forEach((childSnapshot) => {
-                const childKey = childSnapshot.key;
-                const childData = childSnapshot.val();
-                // console.log("Child key: " + childKey);
-                // console.log("Child data: " + childData);
+            onValue(matriculaQuery, (snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                    const childKey = childSnapshot.key;
+                    const childData = childSnapshot.val();
+                    // console.log("Child key: " + childKey);
+                    // console.log("Child data: " + childData);
 
-                nombreProf = childSnapshot.val().profesional.nombre;
-                apellidoProf = childSnapshot.val().profesional.apellido;
+                    nombreProf = childSnapshot.val().profesional.nombre;
+                    apellidoProf = childSnapshot.val().profesional.apellido;
+                });
+            }, {
+                onlyOnce: true
             });
-        }, {
-            onlyOnce: true
-        });
-                         
-        turno = new Turno(userId, profesionalId, nombreProf, apellidoProf, dia, hora, minuto);
-        push(ref(database, 'turnos/'), {
-            turno: turno
-        });
+                            
+            turno = new Turno(userId, profesionalId, nombreProf, apellidoProf, dia, hora, minuto);
+            push(ref(database, 'turnos/'), {
+                turno: turno
+            });
 
-        Swal.fire({
-            title: 'Turno reservado',
-            text: 'Su turno fue reservado con el profesional seleccionado.',
-            icon: 'success',
-            confirmButtonText: 'Continuar'
-        });
+            for(let horario of horariosRef){
+                if(horario.checked){
+                    horario.checked = false;
+                }
+            }
+
+            // for(let acordion of acordionRef){
+            //     acordion.setAttribute("class", "accordion-collapse collapse");
+            // }
+
+            // for(let botonAcordion of botonAcordionRef){
+            //     botonAcordion.setAttribute("aria-expanded", "false");
+            //     botonAcordion.setAttribute("class", "accordion-button collapsed");                
+            // }
+
+            // var modal = new bootstrap.Modal(document.getElementById("exampleModal2"));
+            // modal.hide();
+
+            // const collapseElementList = document.querySelectorAll('.collapse')
+            // const collapseList = [...collapseElementList].map(collapseEl => new bootstrap.Collapse(collapseEl))
+
+            Swal.fire({
+                title: 'Turno reservado',
+                text: 'Su turno fue reservado con el profesional seleccionado.',
+                icon: 'success',
+                confirmButtonText: 'Continuar'
+            });
+        }
+        else{
+            Swal.fire({
+                title: 'Debe repetir la operación',
+                text: 'La fecha indicada debe corresponderse con el profesional que tiene esta disponibilidad',
+                icon: 'warning',
+                confirmButtonText: 'Continuar'
+            });
+        }
+
+        
     }
 
     else if (contador > 1){
@@ -539,4 +593,10 @@ function cancelarTurno (){
             console.log(error);
         }
         )
+}
+
+// logOutPaciente es una función que permite al usuario cerrar su sesión de logueo.
+
+function logOutPaciente (){
+    signOut(auth);
 }
