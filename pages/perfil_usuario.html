@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="../styles/style_user.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <title>Alta de usuario</title>
+        <title>Gestión personal</title>
         <link rel="shortcut icon" href="../media/icons/stethoscope.png">
     </head>
     <body id="body">
@@ -38,7 +38,7 @@
                     <a href="./servicios.html">Servicios</a>
                     <a href="./nosotros.html">Sobre Nosotros</a>
                     <a href="./contacto.html">Contacto</a>
-                    <a href="#">Gestión Personal</a>
+                    <a href="./login.html" id="buttonLogOutUser">LogOut</a>
                 </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
         <section id="datosPacienteId">
             <div class="container container__personal">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12 col-personal">
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-personal" style="height: 100%;">
                         <div class="card">
                             <img class="card-img-top img-paciente" src="../media/user.png" alt="Card image cap">
                             <div class="card-body">
@@ -64,13 +64,30 @@
                                 <p class="card-text">DNI: <span id="documentoId">Número de documento</span></p>
                                 <p class="card-text">Obra Social: <span id="obraSocialId">OS</span></p>
                                 <button type="button" id="buttonModalUpdatePaciente" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width: 100%; margin-bottom: 1rem;">Editar información personal</button>
-                                <button type="button" id="buttonModalTomarTurno" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="width: 100%; margin-bottom: 1rem;">Tomar turno</button>
+                                <button type="button" id="buttonModalTomarTurno" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="width: 100%; margin-bottom: 1rem;" disabled>Tomar turno</button>
                             </div>
                         </div>
+                    </div>
+                    <div id="listadoTurnos" class="overflow-auto col-lg-8 col-md-6 col-sm-12 col-personal" style="height: 32.57rem">
+                        
                     </div>
                 </div>
             </div>            
         </section>
+
+        <div id="divPanel" style="margin-top: 1rem; margin-right: 4rem; margin-left: 4rem; margin-bottom: 1rem; border-bottom: 1px solid #6c8575;">
+
+        </div>
+
+        <!-- <section>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-personal">
+                        <button type="button" id="buttonLogOut" class="btn btn-secondary"  style="width: 100%; margin-bottom: 1rem;">Log Out</button>
+                    </div>
+                </div>
+            </div>
+        </section> -->
 
         <!-- Modal Edit -->
         <div>
@@ -146,14 +163,6 @@
                                 </div>
                             </div>
                         </div>
-                    
-                        <!-- <div class="modal-footer">
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    <button type="button" class="btn btn-success col-lg-8 col-md-8 col-sm-8 col-12" id="botonUpdate" style="margin: 1rem;" data-bs-dismiss="modal">Actualizar datos</button>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
