@@ -1,3 +1,6 @@
+// Entrega final. Curso JS, Coder House 2022.
+// Sistema de gestión en consultorios privados. Emanuel Moroni
+
 console.log("Consola de pruebas - Sistema de gestión de consultorios privados");
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
@@ -27,6 +30,10 @@ const database = getDatabase(app);
 //console.log(database);
 
 // Referencias al DOM
+
+// Referencia a todo el cuerpo del panel de usuario
+let panelRef = document.getElementById("datosPacienteId");
+let divRef = document.getElementById("divPanel");
 
 // Referecia al anchor de LogOut
 let logOutRef = document.getElementById("buttonLogOutUser");
@@ -176,6 +183,17 @@ onAuthStateChanged(auth, (user) => {
             });
     } else {
     // User is signed out
+    panelRef.innerHTML = ``;
+    logOutRef.innerHTML = `Gestión Personal`;
+    divPanel.removeAttribute("style");
+
+    Swal.fire({
+        title: 'Debe loguearse',
+        text: 'Para operar aquí debe estar logueado...',
+        icon: 'info',
+        confirmButtonText: 'Continuar'
+    });
+
     console.log("No hay usuario conectado.");
     // actualizarDatosProfesionales();
     }
@@ -599,4 +617,5 @@ function cancelarTurno (){
 
 function logOutPaciente (){
     signOut(auth);
+    console.log("Usuario deslogueado.");
 }

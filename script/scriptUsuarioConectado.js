@@ -1,3 +1,6 @@
+// Entrega final. Curso JS, Coder House 2022.
+// Sistema de gestión en consultorios privados. Emanuel Moroni
+
 console.log("Consola de pruebas - Sistema de gestión de consultorios privados");
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
@@ -14,7 +17,6 @@ const firebaseConfig = {
 };
 
 // Referencias al DOM
-
 let gestionPersonalRef = document.getElementById("gestionPersonalAnchor");
 
 // Initialize Firebase

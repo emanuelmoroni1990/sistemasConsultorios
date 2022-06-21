@@ -1,11 +1,12 @@
+// Entrega final. Curso JS, Coder House 2022.
+// Sistema de gestión en consultorios privados. Emanuel Moroni
+
 console.log("Consola de pruebas - Sistema de gestión de consultorios privados");
 
-// ¿Qué es el atributo type="module" cuando agrago el script?
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
 import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
 // ¿Cómo obtener esta información? https://firebase.google.com/docs/web/learn-more?authuser=0&hl=es#config-object
-
 const firebaseConfig = {
   apiKey: "AIzaSyAjugINdVkKqoyXgrJPzIUqtCtonmXeCCg",
   authDomain: "sistemasconsultoriosmedicos.firebaseapp.com",
@@ -21,26 +22,25 @@ const app = initializeApp(firebaseConfig);
 
 // Get a reference to the database service; https://firebase.google.com/docs/database/web/start#initialize_the_javascript_sdk
 const database = getDatabase(app);
-console.log(database);
+//console.log(database);
 
-// IdProfesional
-
-let profId = 0;
+// Variable globales
+let profId = 0, i;
+let lunesRef = new Array (16);
+let martesRef = new Array (16);
+let miercolesRef = new Array (16);
+let juevesRef = new Array (16);
+let viernesRef = new Array (16);
 
 // Referencias al DOM
-
 let nombreRef = document.getElementById("nombreProfesional"); 
 let apellidoRef = document.getElementById("apellidoProfesional"); 
 let especialidadRef = document.getElementById("especialidadProfesional");
 let documentoRef = document.getElementById("numeroDocumento"); 
 let matriculaRef = document.getElementById("matriculaProfesional"); 
 
-let i;
-let lunesRef = new Array (16);
-let martesRef = new Array (16);
-let miercolesRef = new Array (16);
-let juevesRef = new Array (16);
-let viernesRef = new Array (16);
+let botonUpdateRef = document.getElementById("botonUpdate");
+botonUpdateRef.addEventListener("click", updateProfesional, false);
 
 for (i = 1; i < 17; i ++){
     lunesRef [i - 1] = document.getElementById("lunes" + i);
@@ -49,9 +49,6 @@ for (i = 1; i < 17; i ++){
     juevesRef [i - 1] = document.getElementById("jueves" + i);
     viernesRef [i - 1] = document.getElementById("viernes" + i);
 }
-
-let botonUpdateRef = document.getElementById("botonUpdate");
-botonUpdateRef.addEventListener("click", updateProfesional, false);
 
 class Profesional{
 
@@ -69,6 +66,8 @@ class Profesional{
     }
 
 }
+
+// updateProfesional es una función que carga la información del profesional que trabaja en los consultorios junto con su disponibilidad horaria.
 
 function updateProfesional (){
 
@@ -98,10 +97,6 @@ function updateProfesional (){
         // //const db = getDatabase();
         push(ref(database, 'profesionales/'), {
             profesional: prof
-        });
-
-        push((ref(database, 'turnos/')), {
-            
         });
 
         // console.log("Información luego del update");
@@ -150,6 +145,7 @@ function updateProfesional (){
  * Luxon API: Get the day of the week. 1 is Monday and 7 is Sunday
  * https://moment.github.io/luxon/api-docs/index.html#datetimeweekday
  */
+
 function checkDias (){
     let dias = new Array(5);
     dias [0] = new Array(16);
@@ -200,17 +196,10 @@ function checkDias (){
 }
 
 // API Docs: https://moment.github.io/luxon/api-docs/index.html#info
-
 // const informacion = luxon.Info;
-
 // console.log(informacion.weekdays());
-
 // API Docs: https://moment.github.io/luxon/api-docs/index.html#duration
-
 // const duracion = luxon.Duration;
-
 // console.log(duracion.fromObject({hours: 2, minutes: 15}));
-
-const DateTime = luxon.DateTime;
-
-console.log(DateTime.now().weekday);
+// const DateTime = luxon.DateTime;
+// console.log(DateTime.now().weekday);
